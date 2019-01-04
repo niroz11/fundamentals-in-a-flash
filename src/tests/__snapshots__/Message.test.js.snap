@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message should match the snapshot with all data passed in 1`] = `
+<div
+  className="messsage"
+>
+  <p>
+    Messsage
+  </p>
+</div>
+`;
