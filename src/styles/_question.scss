@@ -1,0 +1,27 @@
+.prototype-methods {
+  background-color: $yellow;
+}
+
+.scope {
+  background-color: $turquoise;
+}
+
+.oop {
+  background-color: $mint;
+}
+
+.question-contain {
+  border: 3px solid $silver;
+  padding: 1em;
+  border-radius: 1.3em;
+  width: 50%;
+  margin: auto;
+}
+.question {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+button {
+  @include buttons($silver, 90%)
+}

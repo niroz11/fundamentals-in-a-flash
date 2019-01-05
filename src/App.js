@@ -10,14 +10,11 @@ class App extends Component {
     super();
     this.state = {
         category: '',
-        questions: []
+        questions: [],
+        userStatus: 'guessing',
+        quizQuestionsIds: [],
+        quizQuestionsIndex: 0
     }
-  }
-
-  updateCategory = (newCategory) => {
-    this.setState({
-      category: newCategory
-    });
   }
 
   componentDidMount() {
@@ -36,7 +33,7 @@ class App extends Component {
       })
   }
 
-    getQuestionCategories = () => {
+  getQuestionCategories = () => {
     return this.state.questions.reduce((categories, question) => {
 
       if (!categories.includes(question.category)) {
@@ -46,9 +43,39 @@ class App extends Component {
     }, []);
   }
 
+  getQuestionIdsForNewCategory = (category) => {
+    let questionIds = this.state.questions.filter(question => {
+      if (question.category === category) {
+        return question
+      }
+    })
+      .map(filteredQuestion => {
+        return filteredQuestion.id
+      })
+    return questionIds
+  }
+
+  updateCategory = (newCategory) => {
+    this.setState({
+      category: newCategory,
+      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory)
+    });
+  }
+
+  updateUserStatus = (status) => {
+    this.setState({
+      userStatus: status
+    });
+  }
 
   render() {
+   let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex} = this.state;
     let categories = this.getQuestionCategories();
+    let currentQuestion = '';
+    if (category !== '' && userStatus === 'guessing'){
+      let index = quizQuestionsIds[quizQuestionsIndex];
+      currentQuestion = questions[index]
+    }
     return (
       <div className="App">
         <h1 className="title">Fundamentals In A Flash</h1>
@@ -56,10 +83,17 @@ class App extends Component {
           this.state.category === '' && <Welcome updateCategory={this.updateCategory} categories={categories}/>
         }
         {
-          this.state.category !== '' && <Question />
+          currentQuestion !== '' && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
         }
-        <Message />
-        <QuizSummary />
+        {
+          userStatus === 'correct' && <Message userStatus={userStatus}/>
+        }
+        {
+          userStatus === 'wrong' && <Message userStatus={userStatus}/>
+        }
+        {
+          userStatus === 'finished' && <QuizSummary />
+        }
       </div>
     );
   }

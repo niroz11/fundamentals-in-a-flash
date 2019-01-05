@@ -11,7 +11,12 @@ class Messsage extends Component {
   render() {
     return (
       <div className="messsage">
-        <p>Messsage</p>
+      {
+          this.props.userStatus === 'correct' && <p>Yay! That is correct.</p>
+      }
+      {
+          this.props.userStatus === 'wrong' && <p>Sorry that is not correct</p>
+      }
       </div>
     )
   }

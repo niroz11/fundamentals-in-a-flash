@@ -9,7 +9,6 @@ class Welcome extends Component {
   }
   updateCategory = (event) => {
     event.preventDefault()
-    console.log(event.target.innerHTML)
     this.props.updateCategory(event.target.innerHTML)
   }
   render() {

@@ -1,11 +1,11 @@
-@mixin buttons($bg-color) {
+@mixin buttons($bg-color, $width) {
   background: $bg-color;
-  border-radius: 20px;
+  border-radius: .8em;
   display: block;
   font-size: 1.2em;
   height: 3em;
   margin: 1.5em auto;
-  width: 35%;
+  width: $width;
 
   &:hover {
     cursor: pointer;
