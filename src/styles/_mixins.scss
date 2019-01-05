@@ -13,3 +13,12 @@
     transition: all .4s ease;
   }
 }
+
+@mixin card($bg-color) {
+  background-color: $bg-color;
+  border: 3px solid $silver;
+  padding: 1em;
+  border-radius: 1.3em;
+  width: 50%;
+  margin: auto;
+}

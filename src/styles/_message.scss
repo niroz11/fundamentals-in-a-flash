@@ -1,0 +1,26 @@
+.message-contain p {
+  font-size: 1.3em;
+}
+
+.prototype-methods {
+  @include card($yellow);
+}
+
+.scope {
+  @include card($turquoise);
+}
+
+.oop {
+  @include card($mint);
+}
+
+button {
+  @include buttons($silver, 90%)
+}
+
+.answer,
+.sorry {
+  display: block;
+  font-weight: bold;
+  margin: .5em;
+}

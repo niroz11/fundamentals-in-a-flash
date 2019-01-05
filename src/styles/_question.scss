@@ -1,22 +1,15 @@
 .prototype-methods {
-  background-color: $yellow;
+  @include card($yellow);
 }
 
 .scope {
-  background-color: $turquoise;
+  @include card($turquoise);
 }
 
 .oop {
-  background-color: $mint;
+  @include card($mint);
 }
 
-.question-contain {
-  border: 3px solid $silver;
-  padding: 1em;
-  border-radius: 1.3em;
-  width: 50%;
-  margin: auto;
-}
 .question {
   font-size: 1.3em;
   font-weight: 600;
