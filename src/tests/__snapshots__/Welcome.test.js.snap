@@ -5,7 +5,31 @@ exports[`Welcome should match the snapshot with all data passed in 1`] = `
   className="welcome"
 >
   <p>
-    Welcome
+    Take these short quizes to solidify your JS Fundamentals knowledge
   </p>
+  <p>
+    Click a category below to get started
+  </p>
+  <button
+    className="color-0"
+    key="0"
+    onClick={[Function]}
+  >
+    Prototype Methods
+  </button>
+  <button
+    className="color-1"
+    key="1"
+    onClick={[Function]}
+  >
+    Scope
+  </button>
+  <button
+    className="color-2"
+    key="2"
+    onClick={[Function]}
+  >
+    OOP
+  </button>
 </div>
 `;

@@ -1,0 +1,15 @@
+@mixin buttons($bg-color) {
+  background: $bg-color;
+  border-radius: 20px;
+  display: block;
+  font-size: 1.2em;
+  height: 3em;
+  margin: 1.5em auto;
+  width: 35%;
+
+  &:hover {
+    cursor: pointer;
+    background:lighten($bg-color, 10%);
+    transition: all .4s ease;
+  }
+}

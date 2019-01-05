@@ -1,0 +1,15 @@
+.color-0 {
+  @include buttons($yellow)
+}
+
+.color-1 {
+  @include buttons($mint)
+}
+
+.color-2 {
+  @include buttons($turquoise)
+}
+
+p {
+  text-align: center;
+}
