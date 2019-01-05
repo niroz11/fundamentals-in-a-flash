@@ -88,8 +88,20 @@ class App extends Component {
     }
   }
 
+  resetQuiz = () => {
+    this.setState({
+      category: '',
+      userStatus: 'guessing',
+      quizQuestionsIds: [],
+      quizQuestionsIndex: 0,
+      lastQuizQuestionIndex: null,
+      finalQuizQuestion: false,
+      correctCounter: 0
+    });
+  }
+
   render() {
-    let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, lastQuizQuestionIndex, finalQuizQuestion } = this.state;
+    let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, lastQuizQuestionIndex, finalQuizQuestion, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
     let currentQuestion = '';
     if (category !== '' && userStatus !== 'finished'){
@@ -112,7 +124,7 @@ class App extends Component {
           userStatus === 'wrong' && <Message userStatus={userStatus} currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion}/>
         }
         {
-          userStatus === 'finished' && <QuizSummary />
+          userStatus === 'finished' && <QuizSummary category={category} numberCorrect={correctCounter} totalQuestions={quizQuestionsIds.length} resetQuiz={this.resetQuiz}/>
         }
       </div>
     );

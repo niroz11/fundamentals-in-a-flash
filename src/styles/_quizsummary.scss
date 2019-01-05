@@ -1,0 +1,19 @@
+h2 {
+  text-align: center;
+}
+
+.prototype-methods {
+  @include card($yellow);
+}
+
+.scope {
+  @include card($turquoise);
+}
+
+.oop {
+  @include card($mint);
+}
+
+button {
+  @include buttons($silver, 90%)
+}
