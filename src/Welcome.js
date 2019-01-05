@@ -4,7 +4,7 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: ['Prototype Methods', 'Scope', 'OOP']
+      
     };
   }
   updateCategory = (event) => {
@@ -18,7 +18,7 @@ class Welcome extends Component {
         <p>Take these short quizes to solidify your JS Fundamentals knowledge</p>
         <p>Click a category below to get started</p>
         {
-          this.state.categories.map((category, index) => {
+          this.props.categories.map((category, index) => {
             return <button className={"color-" + index} onClick={this.updateCategory}key={index}>{category}</button>
           })
         }
