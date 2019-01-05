@@ -58,20 +58,6 @@ class App extends Component {
     return questionIds
   }
 
-  updateCategory = (newCategory) => {
-    this.setState({
-      category: newCategory,
-      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory),
-      lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory).length - 1
-    });
-  }
-
-  updateUserStatus = (status) => {
-    this.setState({
-      userStatus: status
-    });
-  }
-
   moveToNextQuestion = () => {
     let nextQuestionIndex = (this.state.quizQuestionsIndex + 1);
     if (nextQuestionIndex === (this.state.quizQuestionsIds.length - 1)) {
@@ -79,7 +65,7 @@ class App extends Component {
         userStatus: 'guessing',
         quizQuestionsIndex: nextQuestionIndex,
         finalQuizQuestion: true
-      });      
+      });
     } else {
       this.setState({
         userStatus: 'guessing',
@@ -100,6 +86,26 @@ class App extends Component {
     });
   }
 
+  updateCategory = (newCategory) => {
+    this.setState({
+      category: newCategory,
+      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory),
+      lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory).length - 1
+    });
+  }
+
+  updateUserStatus = (status) => {
+    this.setState({
+      userStatus: status
+    });
+  }
+
+  updateCorrectCounter = () => {
+    this.setState({
+      correctCounter: this.state.correctCounter + 1
+    })
+  }
+
   render() {
     let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, lastQuizQuestionIndex, finalQuizQuestion, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
@@ -115,7 +121,7 @@ class App extends Component {
           this.state.category === '' && <Welcome updateCategory={this.updateCategory} categories={categories}/>
         }
         {
-          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
+          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter}/>
         }
         {
           userStatus === 'correct' && <Message userStatus={userStatus} currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion}/>

@@ -11,6 +11,7 @@ class Question extends Component {
     event.preventDefault();
     if (event.target.innerHTML === this.props.currentQuestion.correct_answer) {
       // save card id to local storage
+      this.props.updateCorrectCounter()
       this.props.updateUserStatus('correct')
     } else {
       this.props.updateUserStatus('wrong')
