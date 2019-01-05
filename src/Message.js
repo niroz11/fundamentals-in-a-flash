@@ -31,7 +31,9 @@ class Messsage extends Component {
         this.props.userStatus === 'wrong' && 
           <p><span className="sorry">Sorry that is not correct.</span>Check out the <a href={resources} target="_blank">docs</a> for more information</p>
       }
-        <button className="next-btn" onClick={this.moveToNextQuestion}>Next</button>
+      {
+          !this.props.isFinalQuestion && <button className="next-btn" onClick={this.moveToNextQuestion}>Next</button>
+      }
       {
           this.props.isFinalQuestion &&  <button className="finish-btn" onClick={this.updateUserStatus}>Finish</button>
       }
