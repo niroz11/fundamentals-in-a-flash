@@ -11,25 +11,25 @@ exports[`Welcome should match the snapshot with all data passed in 1`] = `
     Click a category below to get started
   </p>
   <button
-    className="color-0"
+    className="category color-0"
     key="0"
     onClick={[Function]}
   >
     Prototype Methods
   </button>
   <button
-    className="color-1"
+    className="category color-1"
     key="1"
     onClick={[Function]}
   >
-    Scope
+    OOP
   </button>
   <button
-    className="color-2"
+    className="category color-2"
     key="2"
     onClick={[Function]}
   >
-    OOP
+    Scope
   </button>
 </div>
 `;

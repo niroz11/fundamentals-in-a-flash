@@ -2,10 +2,30 @@
 
 exports[`Question should match the snapshot with all data passed in 1`] = `
 <div
-  className="question"
+  className="question-contain prototype-methods"
 >
-  <h2>
-    Question
-  </h2>
+  <p
+    className="question"
+  >
+    What does the forEach() method return?
+  </p>
+  <button
+    key="answer0"
+    onClick={[Function]}
+  >
+    undefined
+  </button>
+  <button
+    key="answer1"
+    onClick={[Function]}
+  >
+    an array of the same length with all elements modified
+  </button>
+  <button
+    key="answer2"
+    onClick={[Function]}
+  >
+    the original array with its elements modified
+  </button>
 </div>
 `;

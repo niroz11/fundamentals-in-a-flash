@@ -72,7 +72,7 @@ class App extends Component {
    let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex} = this.state;
     let categories = this.getQuestionCategories();
     let currentQuestion = '';
-    if (category !== '' && userStatus === 'guessing'){
+    if (category !== '' && userStatus !== 'finished'){
       let index = quizQuestionsIds[quizQuestionsIndex];
       currentQuestion = questions[index]
     }
@@ -83,13 +83,13 @@ class App extends Component {
           this.state.category === '' && <Welcome updateCategory={this.updateCategory} categories={categories}/>
         }
         {
-          currentQuestion !== '' && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
+          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
         }
         {
-          userStatus === 'correct' && <Message userStatus={userStatus}/>
+          userStatus === 'correct' && <Message userStatus={userStatus} currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
         }
         {
-          userStatus === 'wrong' && <Message userStatus={userStatus}/>
+          userStatus === 'wrong' && <Message userStatus={userStatus} currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus}/>
         }
         {
           userStatus === 'finished' && <QuizSummary />

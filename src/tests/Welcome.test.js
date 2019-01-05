@@ -3,6 +3,8 @@ import Welcome from '../Welcome';
 import { shallow } from 'enzyme';
 
 const updateCategoryMock = jest.fn();
+const categoriesMock = ["Prototype Methods", "OOP", "Scope"];
+
 describe('Welcome', () => {
   let wrapper;
 
@@ -10,6 +12,7 @@ describe('Welcome', () => {
     wrapper = shallow(
       <Welcome
         updateCategory={updateCategoryMock}
+        categories={categoriesMock}
       />
     );
   });
@@ -18,12 +21,9 @@ describe('Welcome', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should have a default state', () => {
-    expect(wrapper.state()).toEqual({ categories: ['Prototype Methods', 'Scope', 'OOP'] });
-  });
-
-  it.skip('should update category when a category is clicked', () => {
-    wrapper.find('color-0').simulate('click')
+  it('should update category when a category is clicked', () => {
+    wrapper.find('.color-0').simulate('click', { preventDefault: () => { }, target: categoriesMock[0]});
+    expect(updateCategoryMock).toBeCalled();
   });
 
 });

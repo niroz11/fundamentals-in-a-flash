@@ -18,7 +18,7 @@ class Welcome extends Component {
         <p>Click a category below to get started</p>
         {
           this.props.categories.map((category, index) => {
-            return <button className={"color-" + index} onClick={this.updateCategory}key={index}>{category}</button>
+            return <button className={"category color-" + index} onClick={this.updateCategory} key={index}>{category}</button>
           })
         }
       </div>
