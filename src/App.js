@@ -93,6 +93,16 @@ class App extends Component {
     }
   }
 
+  skipQuestion = () => {
+    if (this.state.finalQuizQuestion) {
+      this.setState({
+        userStatus: 'finished'
+      })
+    } else {
+      this.moveToNextQuestion();
+    }
+  }
+  
   resetQuiz = () => {
     this.setState({
       category: '',
@@ -144,10 +154,12 @@ class App extends Component {
     let categories = this.getQuestionCategories();
     let questionsPerCategory = this.getNumofQuestionsPerCategory(categories);
     let currentQuestion = '';
+
     if (category !== '' && userStatus !== 'finished'){
       let index = quizQuestionsIds[quizQuestionsIndex];
-      currentQuestion = questions[index]
+      currentQuestion = questions.find(question => question.id === index)
     }
+
     return (
       <div className="App">
         <h1 className="title">Fundamentals In A Flash</h1>
@@ -155,7 +167,7 @@ class App extends Component {
           this.state.category === '' && <Welcome setupQuiz={this.setupQuiz} categories={categories} questionsPerCategory={questionsPerCategory}/>
         }
         {
-          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter}/>
+          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter} skipQuestion={this.skipQuestion}/>
         }
         {
           userStatus === 'correct' && <Message userStatus={userStatus} currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion}/>

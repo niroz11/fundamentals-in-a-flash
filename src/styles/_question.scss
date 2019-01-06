@@ -18,3 +18,8 @@
 button {
   @include buttons($silver, 90%)
 }
+
+.skip-btn {
+  @include buttons($silver, 20%)
+  font-size: 1em;
+}

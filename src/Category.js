@@ -30,7 +30,9 @@ class Category extends Component {
         <p>How would you like to quiz your knowledge today?</p>
         <div className="btns-contain">
           <button className="small-btn" onClick={this.clearStorangeAndSetupQuizWithAllQs}>Try all questions</button>
-        <button className="small-btn" onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
+          {
+            (numMastered !== allCategoryQs) && <button className="small-btn" onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
+          }  
         </div>
       </div>
     )

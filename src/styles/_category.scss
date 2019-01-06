@@ -4,13 +4,12 @@
 }
 
 .btns-contain {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
+  display: flex;
+
 }
 
 .small-btn {
   @include buttons($silver, 90%);
-  display: inline;
-  justify-self: center;
+  // display: inline;
+  // justify-self: center;
 }

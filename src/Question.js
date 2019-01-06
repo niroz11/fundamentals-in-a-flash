@@ -28,6 +28,7 @@ class Question extends Component {
     }
   }
 
+
   render() {
     let { id, category, question, answers, correct_answer, resources } = this.props.currentQuestion;
     let style = category.toLowerCase().split(' ').join('-')
@@ -39,6 +40,7 @@ class Question extends Component {
             return <button onClick={this.validateIfCorrectAnswer} key={'answer' + index}>{answer}</button>
           })
         }
+        <button className="skip-btn" onClick={this.props.skipQuestion}>Skip</button>
       </div>
     )
   }
