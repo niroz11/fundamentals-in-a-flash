@@ -8,15 +8,18 @@ class Question extends Component {
   }
 
   saveCorrectlyAnsweredIdToStorage = (questionId, questionCategory) => {
+    let correctIds = [];
     if (localStorage.hasOwnProperty(questionCategory)) {
-      localStorage.getItem(questionCategory)
+      correctIds = JSON.parse(localStorage.getItem(questionCategory));
     }
+    correctIds.push(questionId);
+    correctIds = JSON.stringify(correctIds);
+    localStorage.setItem(questionCategory, correctIds);
   }
 
   validateIfCorrectAnswer = (event) => {
     event.preventDefault();
     if (event.target.innerHTML === this.props.currentQuestion.correct_answer) {
-      // save card id to local storage
       this.saveCorrectlyAnsweredIdToStorage(this.props.currentQuestion.id, this.props.currentQuestion.category)
       this.props.updateCorrectCounter()
       this.props.updateUserStatus('correct')

@@ -4,13 +4,14 @@ class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      showQuestionOptions: false
     };
   }
 
-  setupQuizWithAllQs = (event) => {
+  clearStorangeAndSetupQuizWithAllQs = (event) => {
     event.preventDefault();
-    this.props.setupQuizWithAllQs(event, this.props.category)
+    localStorage.removeItem(this.props.category);
+    this.props.setupQuizWithAllQs(event, this.props.category);
   }
 
   setupQuizWithoutCorrectlyAnsweredQs = (event) => {
@@ -25,10 +26,12 @@ class Category extends Component {
     return (
       <div className={"category-contain " + style}>
         <p className="category">{this.props.category}</p>
-        <p>Last time you mastered {numMastered} questions, great work!</p>
-        <p>How would you like to quiz your knowledge on {this.props.category} today?</p>
-        <button onClick={this.setupQuizWithAllQs}>All questions</button>
-        <button onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
+        <p>You have mastered {numMastered} {this.props.category} questions, great work!</p>
+        <p>How would you like to quiz your knowledge today?</p>
+        <div className="btns-contain">
+          <button className="small-btn" onClick={this.clearStorangeAndSetupQuizWithAllQs}>Try all questions</button>
+        <button className="small-btn" onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
+        </div>
       </div>
     )
   }

@@ -127,7 +127,6 @@ class App extends Component {
 
   getNumofQuestionsPerCategory = (categories) => {
     let questionsPerCategory = categories.reduce((numPerCategory, curCategory) => {
-      console.log(curCategory)
       let total = 0;
       this.state.questions.forEach(question => {
         if (question.category === curCategory) {

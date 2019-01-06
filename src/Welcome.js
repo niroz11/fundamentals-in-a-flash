@@ -5,8 +5,18 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      categoryToShowOptionsFor: ''
     };
+  }
+
+  checkForCategoryOptions = (event) => {
+    if (localStorage.hasOwnProperty(event.target.innerHTML)) {
+      this.setState({
+        categoryToShowOptionsFor: event.target.innerHTML
+      });
+    } else {
+      this.setupQuizWithAllCategoryQs(event);
+    }
   }
 
   setupQuizWithAllCategoryQs = (event, categoryFromCategoryContain) => {
@@ -20,16 +30,6 @@ class Welcome extends Component {
     this.props.setupQuiz(category, correctlyAnsweredIds)
   }
 
-  // setupQuiz = (event) => {
-  //   event.preventDefault()
-  //   if (localStorage.hasOwnProperty(event.target.innerHTML)) {
-  //     let correctlyAnsweredIds = JSON.parse(localStorage.getItem(event.target.innerHTML));
-  //     this.props.setupQuiz(event.target.innerHTML, correctlyAnsweredIds )
-  //   } else {
-  //     this.props.setupQuiz(event.target.innerHTML)
-  //   }
-  // }
-
   render() {
     return (
       <div className="welcome">
@@ -37,8 +37,8 @@ class Welcome extends Component {
         <p>Select a category below to get started</p>
         {
           this.props.categories.map((category, index) => {
-            return localStorage.hasOwnProperty(category) ? <Category setupQuizWithAllQs={this.setupQuizWithAllCategoryQs} setupWithQsNotMastered={this.setupQuizWithQsNotMastered} key={index} category={category} questionsPerCategory={this.props.questionsPerCategory}/> :
-              <button className={"category color-" + index} onClick={this.setupQuizWithAllCategoryQs} key={index}>{category}</button>
+            return (this.state.categoryToShowOptionsFor === category) ? <Category setupQuizWithAllQs={this.setupQuizWithAllCategoryQs} setupWithQsNotMastered={this.setupQuizWithQsNotMastered} key={index} category={category} questionsPerCategory={this.props.questionsPerCategory}/> :
+              <button className={"category color-" + index} onClick={this.checkForCategoryOptions} key={index}>{category}</button>
           })
         }
       </div>
