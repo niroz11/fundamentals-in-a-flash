@@ -26,7 +26,7 @@ class Category extends Component {
     return (
       <div className={"category-contain " + style}>
         <p className="category">{this.props.category}</p>
-        <p>You have mastered {numMastered} {this.props.category} questions, great work!</p>
+        <p>You have mastered {numMastered} of {allCategoryQs} questions, great work!</p>
         <p>How would you like to quiz your knowledge today?</p>
         <div className="btns-contain">
           <button className="small-btn" onClick={this.clearStorangeAndSetupQuizWithAllQs}>Try all questions</button>

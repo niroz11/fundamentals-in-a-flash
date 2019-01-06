@@ -1,13 +1,13 @@
 .color-0 {
-  @include buttons($yellow, 35%)
+  @include buttons($yellow, 35%, 1.4em)
 }
 
 .color-1 {
-  @include buttons($mint, 35%)
+  @include buttons($mint, 35%, 1.4em)
 }
 
 .color-2 {
-  @include buttons($turquoise, 35%)
+  @include buttons($turquoise, 35%, 1.4em)
 }
 
 p {

@@ -28,12 +28,12 @@ class Question extends Component {
     }
   }
 
-
   render() {
     let { id, category, question, answers, correct_answer, resources } = this.props.currentQuestion;
     let style = category.toLowerCase().split(' ').join('-')
     return (
       <div className={"question-contain " + style}>
+        <p>Question {this.props.questionNum + 1} of {this.props.questionsPerCategory[category]}</p>
         <p className="question">{question}</p>
         {
           answers.map((answer, index) => {

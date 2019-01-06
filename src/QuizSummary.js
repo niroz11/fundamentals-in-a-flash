@@ -20,7 +20,7 @@ class QuizSummary extends Component {
         <h2>{this.props.category} Quiz Summary</h2>
         <p>Great work!</p>
         <p>You answered {this.props.numberCorrect} out of {this.props.totalQuestions} questions correctly</p>
-        <button onClick={this.resetQuiz}>Test Your Knowledge Again</button>
+        <button className="test-again-btn" onClick={this.resetQuiz}>Test Your Knowledge Again</button>
       </div>
     )
   }

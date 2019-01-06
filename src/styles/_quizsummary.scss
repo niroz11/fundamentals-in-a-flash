@@ -2,6 +2,9 @@ h2 {
   text-align: center;
 }
 
+p {
+  font-size: 1.2em;
+}
 .prototype-methods {
   @include card($yellow);
 }
@@ -14,6 +17,6 @@ h2 {
   @include card($mint);
 }
 
-button {
-  @include buttons($silver, 90%)
+.test-again-btn {
+  @include buttons($silver, 60%, 1em)
 }

@@ -1,8 +1,8 @@
-@mixin buttons($bg-color, $width) {
+@mixin buttons($bg-color, $width, $font-size) {
   background: $bg-color;
   border-radius: .8em;
   display: block;
-  font-size: 1.2em;
+  font-size: $font-size;
   height: 3em;
   margin: 1.5em auto;
   width: $width;

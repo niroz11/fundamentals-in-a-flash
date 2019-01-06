@@ -1,15 +1,13 @@
 .category {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 .btns-contain {
   display: flex;
-
+  justify-content: space-evenly;
 }
 
 .small-btn {
-  @include buttons($silver, 90%);
-  // display: inline;
-  // justify-self: center;
+  @include buttons($silver, 200px, 1em);
 }
