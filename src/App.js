@@ -46,16 +46,47 @@ class App extends Component {
     }, []);
   }
 
-  getQuestionIdsForNewCategory = (category) => {
-    let questionIds = this.state.questions.filter(question => {
+  // getQuestionIdsForNewCategory = (category) => {
+  //   let questionIds = this.state.questions.filter(question => {
+  //     if (question.category === category) {
+  //       return question
+  //     }
+  //   })
+  //     .map(filteredQuestion => {
+  //       return filteredQuestion.id
+  //     })
+  //   return questionIds
+  // }
+
+  getQuestionIdsForNewCategory = (category, answeredCorrectIds) => {
+    let filteredQuestions = this.filterByCategory(category);
+    if (answeredCorrectIds) {
+      filteredQuestions = this.returnQuestionsNotAnsweredCorrectly(filteredQuestions, answeredCorrectIds)
+    }
+
+    let questionIds = filteredQuestions.map(filteredQuestion => {
+      return filteredQuestion.id
+    });
+
+    return questionIds
+  }
+
+  filterByCategory = (category) => {
+    let questionsFilteredByCategory = this.state.questions.filter(question => {
       if (question.category === category) {
         return question
       }
-    })
-      .map(filteredQuestion => {
-        return filteredQuestion.id
-      })
-    return questionIds
+    });
+
+    return questionsFilteredByCategory
+  }
+
+  returnQuestionsNotAnsweredCorrectly = (questions, answeredCorrectIds) => {
+    let questionsNotAnsweredCorrectly = questions.filter(question => {
+      return !answeredCorrectIds.includes(question.id)
+    });
+
+    return questionsNotAnsweredCorrectly;
   }
 
   moveToNextQuestion = () => {
