@@ -105,7 +105,7 @@ class App extends Component {
     });
   }
 
-  updateCategory = (newCategory, answeredCorrectIds) => {
+  setupQuiz = (newCategory, answeredCorrectIds) => {
     this.setState({
       category: newCategory,
       quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
@@ -125,9 +125,25 @@ class App extends Component {
     })
   }
 
+  getNumofQuestionsPerCategory = (categories) => {
+    let questionsPerCategory = categories.reduce((numPerCategory, curCategory) => {
+      console.log(curCategory)
+      let total = 0;
+      this.state.questions.forEach(question => {
+        if (question.category === curCategory) {
+          total += 1;
+        }
+      })
+      numPerCategory[curCategory] = total;
+      return numPerCategory;
+    }, {})
+    return questionsPerCategory
+  };
+
   render() {
     let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, lastQuizQuestionIndex, finalQuizQuestion, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
+    let questionsPerCategory = this.getNumofQuestionsPerCategory(categories);
     let currentQuestion = '';
     if (category !== '' && userStatus !== 'finished'){
       let index = quizQuestionsIds[quizQuestionsIndex];
@@ -137,7 +153,7 @@ class App extends Component {
       <div className="App">
         <h1 className="title">Fundamentals In A Flash</h1>
         {
-          this.state.category === '' && <Welcome updateCategory={this.updateCategory} categories={categories}/>
+          this.state.category === '' && <Welcome setupQuiz={this.setupQuiz} categories={categories} questionsPerCategory={questionsPerCategory}/>
         }
         {
           (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter}/>
