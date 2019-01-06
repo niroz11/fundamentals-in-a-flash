@@ -46,19 +46,8 @@ class App extends Component {
     }, []);
   }
 
-  // getQuestionIdsForNewCategory = (category) => {
-  //   let questionIds = this.state.questions.filter(question => {
-  //     if (question.category === category) {
-  //       return question
-  //     }
-  //   })
-  //     .map(filteredQuestion => {
-  //       return filteredQuestion.id
-  //     })
-  //   return questionIds
-  // }
-
   getQuestionIdsForNewCategory = (category, answeredCorrectIds) => {
+    
     let filteredQuestions = this.filterByCategory(category);
     if (answeredCorrectIds) {
       filteredQuestions = this.returnQuestionsNotAnsweredCorrectly(filteredQuestions, answeredCorrectIds)
@@ -85,7 +74,6 @@ class App extends Component {
     let questionsNotAnsweredCorrectly = questions.filter(question => {
       return !answeredCorrectIds.includes(question.id)
     });
-
     return questionsNotAnsweredCorrectly;
   }
 
@@ -117,11 +105,11 @@ class App extends Component {
     });
   }
 
-  updateCategory = (newCategory) => {
+  updateCategory = (newCategory, answeredCorrectIds) => {
     this.setState({
       category: newCategory,
-      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory),
-      lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory).length - 1
+      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
+      lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
     });
   }
 

@@ -7,9 +7,15 @@ class Welcome extends Component {
       
     };
   }
+
   updateCategory = (event) => {
     event.preventDefault()
-    this.props.updateCategory(event.target.innerHTML)
+    if (localStorage.hasOwnProperty(event.target.innerHTML)) {
+      let correctlyAnsweredIds = JSON.parse(localStorage.getItem(event.target.innerHTML));
+      this.props.updateCategory(event.target.innerHTML, correctlyAnsweredIds )
+    } else {
+      this.props.updateCategory(event.target.innerHTML)
+    }
   }
   render() {
     return (
