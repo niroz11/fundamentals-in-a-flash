@@ -1,12 +1,12 @@
-.color-0 {
+.category-btn-prototype-methods {
   @include buttons($yellow, 35%, 1.4em)
 }
 
-.color-1 {
+.category-btn-oop {
   @include buttons($mint, 35%, 1.4em)
 }
 
-.color-2 {
+.category-btn-scope {
   @include buttons($turquoise, 35%, 1.4em)
 }
 

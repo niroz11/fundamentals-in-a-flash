@@ -31,8 +31,9 @@ class Welcome extends Component {
         <p>Select a category below to get started</p>
         {
           this.props.categories.map((category, index) => {
+            let style = category.toLowerCase().split(' ').join('-');
             return (this.state.categoryToShowOptionsFor === category) ? <Category setupQuiz={this.props.setupQuiz} category={category} questionsPerCategory={this.props.questionsPerCategory} key={index}/> :
-              <button className={"category color-" + index} onClick={this.checkLocalStorage} key={index}>{category}</button>
+              <button className={"category-btn-" + style} onClick={this.checkLocalStorage} key={index}>{category}</button>
           })
         }
       </div>

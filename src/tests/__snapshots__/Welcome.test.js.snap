@@ -11,21 +11,21 @@ exports[`Welcome should match the snapshot with all data passed in 1`] = `
     Select a category below to get started
   </p>
   <button
-    className="category color-0"
+    className="category-btn-prototype-methods"
     key="0"
     onClick={[Function]}
   >
     Prototype Methods
   </button>
   <button
-    className="category color-1"
+    className="category-btn-oop"
     key="1"
     onClick={[Function]}
   >
     OOP
   </button>
   <button
-    className="category color-2"
+    className="category-btn-scope"
     key="2"
     onClick={[Function]}
   >
