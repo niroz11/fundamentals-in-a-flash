@@ -14,21 +14,21 @@ class Category extends Component {
     this.props.setupQuiz(this.props.category);
   }
 
-  setupQuizWithoutCorrectlyAnsweredQs = (event) => {
-    event.preventDefault();
-    let correctlyAnsweredIds = JSON.parse(localStorage.getItem(this.props.category));
-    this.props.setupQuiz(this.props.category, correctlyAnsweredIds)
+  retrieveCorrectAnswerIds = (category) => {
+    return JSON.parse(localStorage.getItem(category))
   }
 
-  calculateNumberMastered = (category) => {
-    return JSON.parse(localStorage.getItem(category)).length;
+  setupQuizWithoutCorrectlyAnsweredQs = (event) => {
+    event.preventDefault();
+    let correctlyAnsweredIds = this.retrieveCorrectAnswerIds(this.props.category);
+    this.props.setupQuiz(this.props.category, correctlyAnsweredIds)
   }
 
   render() {
     let { setupQuiz, category, questionsPerCategory } = this.props;
     let style = category.toLowerCase().split(' ').join('-');
     let allCategoryQs = questionsPerCategory[category];
-    let numMastered = this.calculateNumberMastered(category);
+    let numMastered = this.retrieveCorrectAnswerIds(category).length;
     return (
       <div className={"category-contain " + style}>
         <p className="category">{category}</p>

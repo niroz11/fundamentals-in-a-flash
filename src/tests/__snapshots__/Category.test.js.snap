@@ -11,7 +11,7 @@ exports[`Category should match the snapshot with all data passed in 1`] = `
   </p>
   <p>
     You have mastered 
-    12
+    3
      of 
     12
      questions, great work!
@@ -27,6 +27,13 @@ exports[`Category should match the snapshot with all data passed in 1`] = `
       onClick={[Function]}
     >
       Try all questions
+    </button>
+    <button
+      className="small-btn"
+      onClick={[Function]}
+    >
+      Try mastering the other 
+      9
     </button>
   </div>
 </div>
