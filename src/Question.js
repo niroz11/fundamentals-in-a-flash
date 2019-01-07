@@ -7,14 +7,14 @@ class Question extends Component {
     };
   }
 
+  getCorrectIdsFromStorage = (questionCategory) => {
+    return localStorage.hasOwnProperty(questionCategory) ? JSON.parse(localStorage.getItem(questionCategory)) : false;
+  }
+
   saveCorrectlyAnsweredIdToStorage = (questionId, questionCategory) => {
-    let correctIds = [];
-    if (localStorage.hasOwnProperty(questionCategory)) {
-      correctIds = JSON.parse(localStorage.getItem(questionCategory));
-    }
+    let correctIds = this.getCorrectIdsFromStorage(questionCategory) || [];
     correctIds.push(questionId);
-    correctIds = JSON.stringify(correctIds);
-    localStorage.setItem(questionCategory, correctIds);
+    localStorage.setItem(questionCategory, JSON.stringify(correctIds));
   }
 
   validateIfCorrectAnswer = (event) => {
@@ -29,18 +29,19 @@ class Question extends Component {
   }
 
   render() {
-    let { id, category, question, answers, correct_answer, resources } = this.props.currentQuestion;
+    let { currentQuestion, updateUserStatus, updateCorrectCounter, skipQuestion, questionNum, totalQuizQuestions } = this.props
+    let { id, category, question, answers, correct_answer, resources } = currentQuestion;
     let style = category.toLowerCase().split(' ').join('-')
     return (
       <div className={"question-contain " + style}>
-        <p>Question {this.props.questionNum + 1} of {this.props.totalQuizQuestions.length}</p>
+        <p>Question {questionNum + 1} of {totalQuizQuestions.length}</p>
         <p className="question">{question}</p>
         {
           answers.map((answer, index) => {
-            return <button onClick={this.validateIfCorrectAnswer} key={'answer' + index}>{answer}</button>
+            return <button className={'answer' + index} onClick={this.validateIfCorrectAnswer} key={'answer' + index}>{answer}</button>
           })
         }
-        <button className="skip-btn" onClick={this.props.skipQuestion}>Skip</button>
+        <button className="skip-btn" onClick={skipQuestion}>Skip</button>
       </div>
     )
   }

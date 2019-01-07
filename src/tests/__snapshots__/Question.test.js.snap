@@ -1,3 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Question should match the snapshot with all data passed in 1`] = `undefined`;
+exports[`Question should match the snapshot with all data passed in 1`] = `
+<div
+  className="question-contain prototype-methods"
+>
+  <p>
+    Question 
+    2
+     of 
+    8
+  </p>
+  <p
+    className="question"
+  >
+    What does the forEach() method return?
+  </p>
+  <button
+    className="answer0"
+    key="answer0"
+    onClick={[Function]}
+  >
+    undefined
+  </button>
+  <button
+    className="answer1"
+    key="answer1"
+    onClick={[Function]}
+  >
+    an array of the same length with all elements modified
+  </button>
+  <button
+    className="answer2"
+    key="answer2"
+    onClick={[Function]}
+  >
+    the original array with its elements modified
+  </button>
+  <button
+    className="skip-btn"
+    onClick={[MockFunction]}
+  >
+    Skip
+  </button>
+</div>
+`;
