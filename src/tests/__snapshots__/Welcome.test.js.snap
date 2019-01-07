@@ -8,7 +8,7 @@ exports[`Welcome should match the snapshot with all data passed in 1`] = `
     Take these short quizes to solidify your JS Fundamentals knowledge
   </p>
   <p>
-    Click a category below to get started
+    Select a category below to get started
   </p>
   <button
     className="category color-0"

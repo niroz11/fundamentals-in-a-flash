@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category should match the snapshot with all data passed in 1`] = `
+<div
+  className="category-contain prototype-methods"
+>
+  <p
+    className="category"
+  >
+    Prototype Methods
+  </p>
+  <p>
+    You have mastered 
+    7
+     of 
+    12
+     questions, great work!
+  </p>
+  <p>
+    How would you like to quiz your knowledge today?
+  </p>
+  <div
+    className="btns-contain"
+  >
+    <button
+      className="small-btn"
+      onClick={[Function]}
+    >
+      Try all questions
+    </button>
+    <button
+      className="small-btn"
+      onClick={[Function]}
+    >
+      Try mastering the other 
+      5
+    </button>
+  </div>
+</div>
+`;

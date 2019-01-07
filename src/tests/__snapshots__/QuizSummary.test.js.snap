@@ -1,11 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`QuizSummary should match the snapshot with all data passed in 1`] = `
-<div
-  className="quiz-summary"
->
-  <p>
-    QuizSummary
-  </p>
-</div>
-`;
+exports[`QuizSummary should match the snapshot with all data passed in 1`] = `undefined`;

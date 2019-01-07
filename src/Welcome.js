@@ -9,25 +9,19 @@ class Welcome extends Component {
     };
   }
 
-  checkForCategoryOptions = (event) => {
+  checkLocalStorage = (event) => {
+    event.preventDefault();
     if (localStorage.hasOwnProperty(event.target.innerHTML)) {
-      this.setState({
-        categoryToShowOptionsFor: event.target.innerHTML
-      });
+      this.updateCategoryOptionsToShow(event.target.innerHTML)
     } else {
-      this.setupQuizWithAllCategoryQs(event);
+      this.props.setupQuiz(event.target.innerHTML);
     }
   }
 
-  setupQuizWithAllCategoryQs = (event, categoryFromCategoryContain) => {
-    event.preventDefault();
-    let category = categoryFromCategoryContain || event.target.innerHTML;
-    this.props.setupQuiz(category);
-  }
-
-  setupQuizWithQsNotMastered = (category) => {
-    let correctlyAnsweredIds = JSON.parse(localStorage.getItem(category));
-    this.props.setupQuiz(category, correctlyAnsweredIds)
+  updateCategoryOptionsToShow = (category) => {
+    this.setState({
+        categoryToShowOptionsFor: category
+    });
   }
 
   render() {
@@ -37,8 +31,8 @@ class Welcome extends Component {
         <p>Select a category below to get started</p>
         {
           this.props.categories.map((category, index) => {
-            return (this.state.categoryToShowOptionsFor === category) ? <Category setupQuizWithAllQs={this.setupQuizWithAllCategoryQs} setupWithQsNotMastered={this.setupQuizWithQsNotMastered} key={index} category={category} questionsPerCategory={this.props.questionsPerCategory}/> :
-              <button className={"category color-" + index} onClick={this.checkForCategoryOptions} key={index}>{category}</button>
+            return (this.state.categoryToShowOptionsFor === category) ? <Category setupQuiz={this.props.setupQuiz} category={category} questionsPerCategory={this.props.questionsPerCategory} key={index}/> :
+              <button className={"category color-" + index} onClick={this.checkLocalStorage} key={index}>{category}</button>
           })
         }
       </div>

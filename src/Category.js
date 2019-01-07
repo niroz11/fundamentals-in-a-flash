@@ -11,21 +11,27 @@ class Category extends Component {
   clearStorangeAndSetupQuizWithAllQs = (event) => {
     event.preventDefault();
     localStorage.removeItem(this.props.category);
-    this.props.setupQuizWithAllQs(event, this.props.category);
+    this.props.setupQuiz(this.props.category);
   }
 
   setupQuizWithoutCorrectlyAnsweredQs = (event) => {
     event.preventDefault();
-    this.props.setupWithQsNotMastered(this.props.category)
+    let correctlyAnsweredIds = JSON.parse(localStorage.getItem(this.props.category));
+    this.props.setupQuiz(this.props.category, correctlyAnsweredIds)
+  }
+
+  calculateNumberMastered = (category) => {
+    return JSON.parse(localStorage.getItem(category)).length;
   }
 
   render() {
-    let style = this.props.category.toLowerCase().split(' ').join('-');
-    let numMastered = JSON.parse(localStorage.getItem(this.props.category)).length;
-    let allCategoryQs = this.props.questionsPerCategory[this.props.category];
+    let { setupQuiz, category, questionsPerCategory } = this.props;
+    let style = category.toLowerCase().split(' ').join('-');
+    let numMastered = this.calculateNumberMastered(category);
+    let allCategoryQs = questionsPerCategory[category];
     return (
       <div className={"category-contain " + style}>
-        <p className="category">{this.props.category}</p>
+        <p className="category">{category}</p>
         <p>You have mastered {numMastered} of {allCategoryQs} questions, great work!</p>
         <p>How would you like to quiz your knowledge today?</p>
         <div className="btns-contain">

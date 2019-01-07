@@ -33,7 +33,7 @@ class Question extends Component {
     let style = category.toLowerCase().split(' ').join('-')
     return (
       <div className={"question-contain " + style}>
-        <p>Question {this.props.questionNum + 1} of {this.props.questionsPerCategory[category]}</p>
+        <p>Question {this.props.questionNum + 1} of {this.props.totalQuizQuestions.length}</p>
         <p className="question">{question}</p>
         {
           answers.map((answer, index) => {
