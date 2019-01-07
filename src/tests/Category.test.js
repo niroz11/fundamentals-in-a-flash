@@ -11,6 +11,7 @@ const questionsPerCategory = {
   "Scope": 10 
 };
 
+
 describe('Category', () => {
   let wrapper;
 
@@ -25,7 +26,15 @@ describe('Category', () => {
     );
   });
 
-  it('should match the snapshot with all data passed in', () => {
+  it.skip('should match the snapshot with all data passed in', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should remove category from localStorage and invoke setupQuiz', () => {
+    localStorage.setItem('Prototype Methods', "[3,5]");
+    wrapper.instance().clearStorangeAndSetupQuizWithAllQs({preventDefault: () => {}});
+    let doesLocalStorageHaveProperty = localStorage.hasOwnProperty('Prototype Methods')
+    expect(doesLocalStorageHaveProperty).toEqual(false);
+    expect(setupQuizMock).toBeCalled();
   });
 });

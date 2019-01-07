@@ -27,8 +27,8 @@ class Category extends Component {
   render() {
     let { setupQuiz, category, questionsPerCategory } = this.props;
     let style = category.toLowerCase().split(' ').join('-');
-    let numMastered = this.calculateNumberMastered(category);
     let allCategoryQs = questionsPerCategory[category];
+    let numMastered = this.calculateNumberMastered(category);
     return (
       <div className={"category-contain " + style}>
         <p className="category">{category}</p>
