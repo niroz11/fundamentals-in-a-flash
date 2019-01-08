@@ -8,19 +8,15 @@ class QuizSummary extends Component {
     };
   }
 
-  resetQuiz = (event) => {
-    event.preventDefault();
-    this.props.resetQuiz();
-  }
-
   render() {
-    let style = this.props.category.toLowerCase().split(' ').join('-')
+    let { category, numberCorrect, totalQuestions, resetQuiz } = this.props;
+    let style = category.toLowerCase().split(' ').join('-')
     return (
       <div className={"summary-contain " + style}>
-        <h2>{this.props.category} Quiz Summary</h2>
+        <h2>{category} Quiz Summary</h2>
         <p>Great work!</p>
-        <p>You answered {this.props.numberCorrect} out of {this.props.totalQuestions} questions correctly</p>
-        <button className="test-again-btn" onClick={this.resetQuiz}>Test Your Knowledge Again</button>
+        <p>You answered {numberCorrect} out of {totalQuestions} questions correctly</p>
+        <button className="test-again-btn" onClick={resetQuiz}>Test Your Knowledge Again</button>
       </div>
     )
   }

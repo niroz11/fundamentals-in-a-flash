@@ -1,3 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`QuizSummary should match the snapshot with all data passed in 1`] = `undefined`;
+exports[`QuizSummary should match the snapshot with all data passed in 1`] = `
+<div
+  className="summary-contain scope"
+>
+  <h2>
+    Scope
+     Quiz Summary
+  </h2>
+  <p>
+    Great work!
+  </p>
+  <p>
+    You answered 
+    5
+     out of 
+    10
+     questions correctly
+  </p>
+  <button
+    className="test-again-btn"
+    onClick={[MockFunction]}
+  >
+    Test Your Knowledge Again
+  </button>
+</div>
+`;
