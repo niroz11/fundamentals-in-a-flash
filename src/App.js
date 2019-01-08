@@ -29,21 +29,21 @@ class App extends Component {
           if (question.category === 'Prototype methods'){
             question.category = 'Prototype Methods'
           }
-        })
+        });
         this.setState({
           questions: results.fundamentalsQuestions
-        })
-      })
+        });
+      });
   }
 
   filterQuestionsByCategory = (category) => {
     let questionsFilteredByCategory = this.state.questions.filter(question => {
       if (question.category === category) {
-        return question
+        return question;
       }
     });
 
-    return questionsFilteredByCategory
+    return questionsFilteredByCategory;
   }
 
   getNumofQuestionsPerCategory = (categories) => {
@@ -56,15 +56,14 @@ class App extends Component {
       })
       numPerCategory[curCategory] = total;
       return numPerCategory;
-    }, {})
-    return questionsPerCategory
+    }, {});
+    return questionsPerCategory;
   };
 
   getQuestionCategories = () => {
     return this.state.questions.reduce((categories, question) => {
-
       if (!categories.includes(question.category)) {
-        categories.push(question.category)
+        categories.push(question.category);
       }
       return categories;
     }, []);
@@ -73,14 +72,14 @@ class App extends Component {
   getQuestionIdsForNewCategory = (category, answeredCorrectIds) => {
     let filteredQuestions = this.filterQuestionsByCategory(category);
     if (answeredCorrectIds) {
-      filteredQuestions = this.returnQuestionsNotAnsweredCorrectly(filteredQuestions, answeredCorrectIds)
+      filteredQuestions = this.returnQuestionsNotAnsweredCorrectly(filteredQuestions, answeredCorrectIds);
     }
 
     let questionIds = filteredQuestions.map(filteredQuestion => {
-      return filteredQuestion.id
+      return filteredQuestion.id;
     });
 
-    return questionIds
+    return questionIds;
   }
 
   moveToNextQuestion = () => {
@@ -139,7 +138,7 @@ class App extends Component {
     if (this.state.finalQuizQuestion) {
       this.setState({
         userStatus: 'finished'
-      })
+      });
     } else {
       this.moveToNextQuestion();
     }
@@ -154,7 +153,7 @@ class App extends Component {
   updateCorrectCounter = () => {
     this.setState({
       correctCounter: this.state.correctCounter + 1
-    })
+    });
   }
 
   render() {
@@ -165,14 +164,14 @@ class App extends Component {
 
     if (category !== '' && userStatus !== 'finished'){
       let index = quizQuestionsIds[quizQuestionsIndex];
-      currentQuestion = questions.find(question => question.id === index)
+      currentQuestion = questions.find(question => question.id === index);
     }
 
     return (
       <div className="App">
         <h1 className="title">Fundamentals In A Flash</h1>
         {
-          this.state.category === '' && <Welcome setupQuiz={this.setupQuiz} categories={categories} questionsPerCategory={questionsPerCategory}/>
+          category === '' && <Welcome setupQuiz={this.setupQuiz} categories={categories} questionsPerCategory={questionsPerCategory}/>
         }
         {
           (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds}/>
