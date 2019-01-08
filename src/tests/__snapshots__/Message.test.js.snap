@@ -1,3 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Message should match the snapshot with all data passed in 1`] = `undefined`;
+exports[`Message should match the snapshot with all data passed in 1`] = `
+<div
+  className="message-contain oop"
+>
+  <p>
+    Yay! 
+    <span
+      className="answer"
+    >
+      super
+    </span>
+     is the correct answer
+  </p>
+  <button
+    className="next-btn"
+    onClick={[MockFunction]}
+  >
+    Next
+  </button>
+</div>
+`;
