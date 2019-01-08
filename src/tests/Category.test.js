@@ -41,11 +41,17 @@ describe('Category', () => {
     expect(setupQuizMock).toHaveBeenCalledWith(category, [4, 5, 7]);
   });
 
-  it('should remove the category from localStorage if there and pass the category to app when learStorangeAndSetupQuizWithAllQs is called', () => {
+  it('should remove the category from localStorage if there and pass the category to app when clearStorangeAndSetupQuizWithAllQs is called', () => {
     expect(localStorage.hasOwnProperty('Prototype Methods')).toEqual(true);
     wrapper.instance().clearStorangeAndSetupQuizWithAllQs({preventDefault: () => {}});
     expect(localStorage.hasOwnProperty('Prototype Methods')).toEqual(false);
     expect(setupQuizMock).toHaveBeenCalledWith(category)
+  });
+
+  it('should send the correct ids, category and string of one to app when setupQuizWithOneQuestion has been called', () => {
+    localStorage.setItem('Prototype Methods', "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]")
+    wrapper.instance().setupQuizWithOneQuestion({ preventDefault: () => { } });
+    expect(setupQuizMock).toHaveBeenCalledWith(category, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'one');    
   });
 
 });

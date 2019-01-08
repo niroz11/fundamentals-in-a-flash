@@ -115,12 +115,21 @@ class App extends Component {
     });
   }
 
-  setupQuiz = (newCategory, answeredCorrectIds) => {
-    this.setState({
-      category: newCategory,
-      quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
-      lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
-    });
+  setupQuiz = (newCategory, answeredCorrectIds, oneQuestion) => {
+    if (oneQuestion === 'one') {
+      this.setState({
+        category: newCategory,
+        quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
+        lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1,
+        finalQuizQuestion: true
+      });
+    } else {
+      this.setState({
+        category: newCategory,
+        quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
+        lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
+      });
+    }
   }
 
   updateUserStatus = (status) => {
