@@ -2,6 +2,7 @@
   "name": "fundamentals-in-a-flash",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://trbachmann.github.io/fundamentals-in-a-flash",
   "dependencies": {
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
@@ -11,6 +12,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "gh-pages -d build",
+    "deploy": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -26,7 +29,8 @@
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "enzyme-to-json": "^3.3.5"
+    "enzyme-to-json": "^3.3.5",
+    "gh-pages": "^2.0.1"
   },
   "jest": {
     "snapshotSerializers": [
