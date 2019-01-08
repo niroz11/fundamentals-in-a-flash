@@ -36,6 +36,30 @@ class App extends Component {
       })
   }
 
+  filterQuestionsByCategory = (category) => {
+    let questionsFilteredByCategory = this.state.questions.filter(question => {
+      if (question.category === category) {
+        return question
+      }
+    });
+
+    return questionsFilteredByCategory
+  }
+
+  getNumofQuestionsPerCategory = (categories) => {
+    let questionsPerCategory = categories.reduce((numPerCategory, curCategory) => {
+      let total = 0;
+      this.state.questions.forEach(question => {
+        if (question.category === curCategory) {
+          total += 1;
+        }
+      })
+      numPerCategory[curCategory] = total;
+      return numPerCategory;
+    }, {})
+    return questionsPerCategory
+  };
+
   getQuestionCategories = () => {
     return this.state.questions.reduce((categories, question) => {
 
@@ -47,8 +71,7 @@ class App extends Component {
   }
 
   getQuestionIdsForNewCategory = (category, answeredCorrectIds) => {
-    
-    let filteredQuestions = this.filterByCategory(category);
+    let filteredQuestions = this.filterQuestionsByCategory(category);
     if (answeredCorrectIds) {
       filteredQuestions = this.returnQuestionsNotAnsweredCorrectly(filteredQuestions, answeredCorrectIds)
     }
@@ -58,23 +81,6 @@ class App extends Component {
     });
 
     return questionIds
-  }
-
-  filterByCategory = (category) => {
-    let questionsFilteredByCategory = this.state.questions.filter(question => {
-      if (question.category === category) {
-        return question
-      }
-    });
-
-    return questionsFilteredByCategory
-  }
-
-  returnQuestionsNotAnsweredCorrectly = (questions, answeredCorrectIds) => {
-    let questionsNotAnsweredCorrectly = questions.filter(question => {
-      return !answeredCorrectIds.includes(question.id)
-    });
-    return questionsNotAnsweredCorrectly;
   }
 
   moveToNextQuestion = () => {
@@ -92,16 +98,6 @@ class App extends Component {
       });
     }
   }
-
-  skipQuestion = () => {
-    if (this.state.finalQuizQuestion) {
-      this.setState({
-        userStatus: 'finished'
-      })
-    } else {
-      this.moveToNextQuestion();
-    }
-  }
   
   resetQuiz = () => {
     this.setState({
@@ -113,6 +109,13 @@ class App extends Component {
       finalQuizQuestion: false,
       correctCounter: 0
     });
+  }
+
+  returnQuestionsNotAnsweredCorrectly = (questions, answeredCorrectIds) => {
+    let questionsNotAnsweredCorrectly = questions.filter(question => {
+      return !answeredCorrectIds.includes(question.id)
+    });
+    return questionsNotAnsweredCorrectly;
   }
 
   setupQuiz = (newCategory, answeredCorrectIds, oneQuestion) => {
@@ -132,6 +135,16 @@ class App extends Component {
     }
   }
 
+  skipQuestion = () => {
+    if (this.state.finalQuizQuestion) {
+      this.setState({
+        userStatus: 'finished'
+      })
+    } else {
+      this.moveToNextQuestion();
+    }
+  }
+
   updateUserStatus = (status) => {
     this.setState({
       userStatus: status
@@ -143,20 +156,6 @@ class App extends Component {
       correctCounter: this.state.correctCounter + 1
     })
   }
-
-  getNumofQuestionsPerCategory = (categories) => {
-    let questionsPerCategory = categories.reduce((numPerCategory, curCategory) => {
-      let total = 0;
-      this.state.questions.forEach(question => {
-        if (question.category === curCategory) {
-          total += 1;
-        }
-      })
-      numPerCategory[curCategory] = total;
-      return numPerCategory;
-    }, {})
-    return questionsPerCategory
-  };
 
   render() {
     let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, lastQuizQuestionIndex, finalQuizQuestion, correctCounter } = this.state;

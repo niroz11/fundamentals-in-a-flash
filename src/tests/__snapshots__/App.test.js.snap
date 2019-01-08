@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot with all data passed in 1`] = `
+<div
+  className="App"
+>
+  <h1
+    className="title"
+  >
+    Fundamentals In A Flash
+  </h1>
+  <Welcome
+    categories={
+      Array [
+        "Prototype Methods",
+        "OOP",
+        "Scope",
+      ]
+    }
+    questionsPerCategory={
+      Object {
+        "OOP": 8,
+        "Prototype Methods": 12,
+        "Scope": 10,
+      }
+    }
+    setupQuiz={[Function]}
+  />
+</div>
+`;
