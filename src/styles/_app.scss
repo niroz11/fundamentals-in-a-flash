@@ -1,11 +1,31 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 .App {
   font-family: $body-font;
-
   min-height: 100vh;
 }
+
+.fa-home {
+  color: black;
+  font-size: 1.5em;
+  margin: .7em;
+  text-align: right;
+
+  &:hover {
+    cursor: pointer;
+    color: darken($silver, 20%);
+    transition: all .4s ease;
+  }
+}
+
 .title {
   text-align: center;
   font-size: 3em;
+  margin-top: 0;
 }
 
 .background-color{

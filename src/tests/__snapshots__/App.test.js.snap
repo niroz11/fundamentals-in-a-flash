@@ -4,11 +4,17 @@ exports[`App should match the snapshot with all data passed in 1`] = `
 <div
   className="App"
 >
-  <h1
-    className="title"
-  >
-    Fundamentals In A Flash
-  </h1>
+  <header>
+    <i
+      className="fas fa-home"
+      onClick={[Function]}
+    />
+    <h1
+      className="title"
+    >
+      Fundamentals In A Flash
+    </h1>
+  </header>
   <Welcome
     categories={
       Array [

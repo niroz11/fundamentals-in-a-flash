@@ -169,7 +169,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1 className="title">Fundamentals In A Flash</h1>
+        <header>
+          <i className="fas fa-home" onClick={this.resetQuiz}></i>
+          <h1 className="title">Fundamentals In A Flash</h1>
+        </header>
         {
           category === '' && <Welcome setupQuiz={this.setupQuiz} categories={categories} questionsPerCategory={questionsPerCategory}/>
         }
