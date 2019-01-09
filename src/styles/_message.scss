@@ -2,20 +2,9 @@
   font-size: 1.3em;
 }
 
-.prototype-methods {
-  @include card($yellow);
-}
-
-.scope {
-  @include card($turquoise);
-}
-
-.oop {
-  @include card($mint);
-}
-
-button {
-  @include buttons($silver, 90%, 1.2em)
+.next-btn,
+.finish-btn {
+  @include buttons($silver, 40%, 1em)
 }
 
 .answer,

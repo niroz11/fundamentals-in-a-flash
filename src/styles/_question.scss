@@ -1,18 +1,22 @@
 .prototype-methods {
   @include card($yellow);
+  width: 50%;
 }
 
 .scope {
   @include card($turquoise);
+  width: 50%;
 }
 
 .oop {
   @include card($mint);
+  width: 50%;
 }
 
 .question {
   font-size: 1.4em;
   font-weight: 600;
+  margin: 1em;
 }
 
 button {
@@ -21,4 +25,12 @@ button {
 
 .skip-btn {
   @include buttons($silver, 20%, 1em)
+}
+
+@media (max-width: 795px) {
+  .prototype-methods,
+  .scope,
+  .oop {
+    width: 60%;
+  }
 }

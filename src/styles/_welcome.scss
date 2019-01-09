@@ -13,3 +13,11 @@
 p {
   text-align: center;
 }
+
+@media (max-width: 795px) {
+  .category-btn-prototype-methods,
+  .category-btn-oop,
+  .category-btn-scope {
+    width: 60%
+  }
+}
