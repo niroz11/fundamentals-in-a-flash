@@ -11,7 +11,7 @@ exports[`Message should match the snapshot with all data passed in 1`] = `
     >
       super
     </span>
-     is the correct answer
+     is the correct answer 
   </p>
   <button
     className="next-btn"
