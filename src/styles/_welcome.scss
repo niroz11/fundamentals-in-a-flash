@@ -1,13 +1,13 @@
 .category-btn-prototype-methods {
-  @include buttons($yellow, 35%, 1.4em)
+  @include buttons($yellow, 35%, 1.4em);
 }
 
 .category-btn-oop {
-  @include buttons($mint, 35%, 1.4em)
+  @include buttons($mint, 35%, 1.4em);
 }
 
 .category-btn-scope {
-  @include buttons($turquoise, 35%, 1.4em)
+  @include buttons($turquoise, 35%, 1.4em);
 }
 
 p {
@@ -18,6 +18,14 @@ p {
   .category-btn-prototype-methods,
   .category-btn-oop,
   .category-btn-scope {
-    width: 60%
+    width: 60%;
+  }
+}
+
+@media (max-width: 470px) {
+  .category-btn-prototype-methods,
+  .category-btn-oop,
+  .category-btn-scope {
+    font-size: 1.2em;
   }
 }

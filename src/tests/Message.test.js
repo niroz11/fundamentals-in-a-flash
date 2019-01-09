@@ -39,12 +39,12 @@ describe('Message', () => {
   });
 
   it('should update state to finished', () => {
-    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Finish' }})
+    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Finish' }});
     expect(updateUserStatusMock).toHaveBeenCalledWith('finished');
   });
 
   it('should update state to guessing when the user is wrong and clicks try again', () => {
-    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Try Again' } })
+    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Try Again' } });
     expect(updateUserStatusMock).toHaveBeenCalledWith('guessing');
   });
 });

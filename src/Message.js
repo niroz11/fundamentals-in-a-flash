@@ -11,16 +11,16 @@ class Messsage extends Component {
   updateUserStatus = (event) => {
     event.preventDefault();
     if (event.target.innerHTML === 'Finish'){
-      this.props.updateUserStatus('finished')
+      this.props.updateUserStatus('finished');
     } else {
-      this.props.updateUserStatus('guessing')
+      this.props.updateUserStatus('guessing');
     }
   }
 
   render() {
-    let { userStatus, currentQuestion, updateUserStatus, moveToNextQuestion, isFinalQuestion } = this.props;
+    let { userStatus, currentQuestion, moveToNextQuestion, isFinalQuestion } = this.props;
     let { id, category, question, answers, correct_answer, resources } = currentQuestion;
-    let style = category.toLowerCase().split(' ').join('-')
+    let style = category.toLowerCase().split(' ').join('-');
     return (
       <div className={"message-contain " + style}>
       {
@@ -38,7 +38,10 @@ class Messsage extends Component {
           (!isFinalQuestion && userStatus === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatus}>Try Again</button><button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button></div> 
       }
       {
-          isFinalQuestion &&  <button className="finish-btn" onClick={this.updateUserStatus}>Finish</button>
+          (isFinalQuestion && userStatus === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatus}>Try Again</button><button className="finish-btn small-btn" onClick={this.updateUserStatus}>Finish</button></div>
+      }
+      {
+          (isFinalQuestion && userStatus === 'correct')  &&  <button className="finish-btn" onClick={this.updateUserStatus}>Finish</button>
       }
       </div>
     )

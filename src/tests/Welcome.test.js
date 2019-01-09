@@ -38,7 +38,7 @@ describe('Welcome', () => {
 
   it('should update state with a new category to show options for', () => {
     wrapper.instance().updateCategoryOptionsToShow('OOP');
-    expect(wrapper.state('categoryToShowOptionsFor')).toEqual('OOP')
+    expect(wrapper.state('categoryToShowOptionsFor')).toEqual('OOP');
   });
 
   it('should check localStorage when a category is clicked and if it is in storage call updateCategoryOptionsToShow()', () => {
@@ -51,7 +51,7 @@ describe('Welcome', () => {
 
   it('should check localStorage when a category is clicked and send the category to app if it is not in storage', () => {
     wrapper.find('button.category-btn-oop').simulate('click', { preventDefault: () => { }, target: { innerHTML: 'OOP' } });
-    expect(setupQuizMock).toHaveBeenCalled() 
+    expect(setupQuizMock).toHaveBeenCalled();
   });
 
 });

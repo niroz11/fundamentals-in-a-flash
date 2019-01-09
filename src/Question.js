@@ -21,17 +21,17 @@ class Question extends Component {
     event.preventDefault();
     if (event.target.innerHTML === this.props.currentQuestion.correct_answer) {
       this.saveCorrectlyAnsweredIdToStorage(this.props.currentQuestion.id, this.props.currentQuestion.category)
-      this.props.updateCorrectCounter()
-      this.props.updateUserStatus('correct')
+      this.props.updateCorrectCounter();
+      this.props.updateUserStatus('correct');
     } else {
-      this.props.updateUserStatus('wrong')
+      this.props.updateUserStatus('wrong');
     }
   }
 
   render() {
-    let { currentQuestion, updateUserStatus, updateCorrectCounter, skipQuestion, questionNum, totalQuizQuestions } = this.props
+    let { currentQuestion, updateUserStatus, updateCorrectCounter, skipQuestion, questionNum, totalQuizQuestions } = this.props;  
     let { id, category, question, answers, correct_answer, resources } = currentQuestion;
-    let style = category.toLowerCase().split(' ').join('-')
+    let style = category.toLowerCase().split(' ').join('-');
     return (
       <div className={"question-contain " + style}>
         <p>Question {questionNum + 1} of {totalQuizQuestions.length}</p>

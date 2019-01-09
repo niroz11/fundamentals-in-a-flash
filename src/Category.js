@@ -15,23 +15,23 @@ class Category extends Component {
   }
 
   retrieveCorrectAnswerIds = (category) => {
-    return JSON.parse(localStorage.getItem(category))
+    return JSON.parse(localStorage.getItem(category));
   }
 
   setupQuizWithoutCorrectlyAnsweredQs = (event) => {
     event.preventDefault();
     let correctlyAnsweredIds = this.retrieveCorrectAnswerIds(this.props.category);
-    this.props.setupQuiz(this.props.category, correctlyAnsweredIds)
+    this.props.setupQuiz(this.props.category, correctlyAnsweredIds);
   }
 
   setupQuizWithOneQuestion = (event) => {
     event.preventDefault();
     let correctlyAnsweredIds = this.retrieveCorrectAnswerIds(this.props.category);
-    this.props.setupQuiz(this.props.category, correctlyAnsweredIds, 'one')
+    this.props.setupQuiz(this.props.category, correctlyAnsweredIds, 'one');
   }
 
   render() {
-    let { setupQuiz, category, questionsPerCategory } = this.props;
+    let { category, questionsPerCategory } = this.props;
     let style = category.toLowerCase().split(' ').join('-');
     let allCategoryQs = questionsPerCategory[category];
     let numMastered = this.retrieveCorrectAnswerIds(category).length;

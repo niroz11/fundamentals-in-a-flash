@@ -291,7 +291,7 @@ describe('App', () => {
 
   it('should filter questions by category', () => {
     let filteredQuestions = wrapper.instance().filterQuestionsByCategory('OOP');
-    expect(filteredQuestions).toEqual([{id: "12",category: "OOP", question: "What does OOP stand for?", answers: ["Overt Object Programming", "Object Orientied Prototyping", "Object Oriented Programming"], correct_answer: "Object Oriented Programming", resources: "https://developer.mozilla.org/en-US/docs/Glossary/OOP"}, {id: "13", category: "OOP", question: "What is the practice of allowing an object to inherit the data and behavior of its parent?", answers: ["Inheritance", "Abstraction", "Encapsulation"], correct_answer: "Inheritance", resources: "https://developer.mozilla.org/ms/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript"}, {id: "14", category: "OOP", question: "The practice of packaging data and functions into one component and then controlling access to it to make a 'blackbox' out of the object.", answers: ["Inheritance", "Abstraction", "Encapsulation"], correct_answer: "Encapsulation", resources: "https://developer.mozilla.org/en-US/docs/Glossary/Encapsulation"}, {id: "15", category: "OOP", question: "What is the Single Responsibility Principle", answers: ["Principle where lines of code cann't have matching information.", "Principle of least knowlede, where each object should have a single duty.", "Principle where objects are all in a single file."], correct_answer: "Principle of least knowlede, where each object should have a single duty.", resources: "https://en.wikipedia.org/wiki/Single_responsibility_principle"}, {id: "16", category: "OOP", question: "Which of these are Not benefits of OOP?", answers: ["Code reusability and mantainability", "Design and scalability", "Increased coupling"], correct_answer: "Increased coupling", resources: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS"}, {id: "17", category: "OOP", question: "When creating a new class that extends from a parent class, what keyword is used to access and invoke methods from the parent class?", answers: ["function", "borrow", "super"], correct_answer: "super", resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super"}, {id: "18", category: "OOP", question: "What are constructor methods used for?", answers: ["Constructing the syntax for an array.", "Creating and initializing an object created within a class.", "Combining two or more objects."], correct_answer: "Creating and initializing an object created within a class.", resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor"}, {id: "19", category: "OOP", question: "What is the difference between a class and an object?", answers: ["An object is a blueprint to make a class.", "A class is a blueprint to make an object.", "There is no difference."], correct_answer: "A class is a blueprint to make an object.", resources: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS#Creating_actual_objects"}])
+    expect(filteredQuestions).toEqual([{id: "12",category: "OOP", question: "What does OOP stand for?", answers: ["Overt Object Programming", "Object Orientied Prototyping", "Object Oriented Programming"], correct_answer: "Object Oriented Programming", resources: "https://developer.mozilla.org/en-US/docs/Glossary/OOP"}, {id: "13", category: "OOP", question: "What is the practice of allowing an object to inherit the data and behavior of its parent?", answers: ["Inheritance", "Abstraction", "Encapsulation"], correct_answer: "Inheritance", resources: "https://developer.mozilla.org/ms/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript"}, {id: "14", category: "OOP", question: "The practice of packaging data and functions into one component and then controlling access to it to make a 'blackbox' out of the object.", answers: ["Inheritance", "Abstraction", "Encapsulation"], correct_answer: "Encapsulation", resources: "https://developer.mozilla.org/en-US/docs/Glossary/Encapsulation"}, {id: "15", category: "OOP", question: "What is the Single Responsibility Principle", answers: ["Principle where lines of code cann't have matching information.", "Principle of least knowlede, where each object should have a single duty.", "Principle where objects are all in a single file."], correct_answer: "Principle of least knowlede, where each object should have a single duty.", resources: "https://en.wikipedia.org/wiki/Single_responsibility_principle"}, {id: "16", category: "OOP", question: "Which of these are Not benefits of OOP?", answers: ["Code reusability and mantainability", "Design and scalability", "Increased coupling"], correct_answer: "Increased coupling", resources: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS"}, {id: "17", category: "OOP", question: "When creating a new class that extends from a parent class, what keyword is used to access and invoke methods from the parent class?", answers: ["function", "borrow", "super"], correct_answer: "super", resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super"}, {id: "18", category: "OOP", question: "What are constructor methods used for?", answers: ["Constructing the syntax for an array.", "Creating and initializing an object created within a class.", "Combining two or more objects."], correct_answer: "Creating and initializing an object created within a class.", resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor"}, {id: "19", category: "OOP", question: "What is the difference between a class and an object?", answers: ["An object is a blueprint to make a class.", "A class is a blueprint to make an object.", "There is no difference."], correct_answer: "A class is a blueprint to make an object.", resources: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS#Creating_actual_objects"}]);
   });
 
   it('should get the number of questions for each category', () => {
@@ -310,12 +310,12 @@ describe('App', () => {
 
   it('should get question ids when only provided a category', () => {
     let questionIds = wrapper.instance().getQuestionIdsForNewCategory("Scope");
-    expect(questionIds).toEqual(["20", "21", "22", "23", "24", "25", "26", "27", "28", "29"])
+    expect(questionIds).toEqual(["20", "21", "22", "23", "24", "25", "26", "27", "28", "29"]);
   });
 
   it('should get question ids when provided a cateogry and correctly answered ids', () => {
     let questionIds = wrapper.instance().getQuestionIdsForNewCategory("Scope", ["20", "24", "26", "27"]);
-    expect(questionIds).toEqual(["21", "22", "23", "25", "28", "29"])
+    expect(questionIds).toEqual(["21", "22", "23", "25", "28", "29"]);
   });
 
   it('should move to the next question and update state', () => {
@@ -343,7 +343,7 @@ describe('App', () => {
       lastQuizQuestionIndex: 4,
       finalQuizQuestion: true,
       correctCounter: 2
-    })
+    });
     wrapper.instance().resetQuiz();
     expect(wrapper.state()).toEqual({
       category: '',
@@ -388,7 +388,7 @@ describe('App', () => {
       lastQuizQuestionIndex: 0,
       finalQuizQuestion: true,
       correctCounter: 0
-    })
+    });
   });
 
   it('should skip a question', () => {

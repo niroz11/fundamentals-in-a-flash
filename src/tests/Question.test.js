@@ -60,7 +60,7 @@ describe('Question', () => {
 
   it('should validate if an answer is correct and if not pass app a user status of wrong', () => {
     wrapper.find('button.answer2').simulate('click', { preventDefault: () => { }, target: { innerHTML: question.answers[2] } });
-    expect(updateUserStatusMock).toHaveBeenCalledWith('wrong')
+    expect(updateUserStatusMock).toHaveBeenCalledWith('wrong');
   });
 
   it('should validate if an answer is correct and if so save the id, update correct counter and pass app user status of correct', () => {

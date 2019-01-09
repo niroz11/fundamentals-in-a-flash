@@ -3,7 +3,7 @@
 }
 
 .finish-btn {
-  @include buttons($silver, 40%, 1em)
+  @include buttons($silver, 40%, 1em);
 }
 
 .answer,
@@ -11,4 +11,10 @@
   display: block;
   font-weight: bold;
   margin: .5em;
+}
+
+@media(max-width: 795px) {
+  .message-contain p {
+    font-size: 1.2em; 
+  }
 }

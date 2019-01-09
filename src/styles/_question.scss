@@ -1,15 +1,19 @@
 .prototype-methods {
   @include card($yellow);
-  width: 50%;
 }
 
 .scope {
   @include card($turquoise);
-  width: 50%;
 }
 
 .oop {
   @include card($mint);
+
+}
+
+.prototype-methods,
+.scope,
+.oop {
   width: 50%;
 }
 
@@ -20,11 +24,11 @@
 }
 
 button {
-  @include buttons($silver, 90%, 1.2em)
+  @include buttons($silver, 90%, 1.2em);
 }
 
 .skip-btn {
-  @include buttons($silver, 20%, 1em)
+  @include buttons($silver, 20%, 1em);
 }
 
 @media (max-width: 795px) {
@@ -32,5 +36,26 @@ button {
   .scope,
   .oop {
     width: 60%;
+  }
+
+  .question {
+    font-size: 1.2em;
+  }
+
+  button {
+    font-size: 1em;
+    height: 4em;
+  }
+
+  .skip-btn {
+    font-size: .8em;
+  }
+}
+
+@media (max-width: 600px) {
+  .prototype-methods,
+  .scope,
+  .oop {
+    width: 80%;
   }
 }

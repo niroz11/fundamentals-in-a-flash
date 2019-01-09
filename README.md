@@ -18,4 +18,4 @@ Run `npm test` from the root directory
 ### Original Assignment: 
 [Memoize](http://frontend.turing.io/projects/memoize.html) project from Turing School of Software and Design
 ### Wireframes:
-![Wireframes](./assets/fundamentals-in-a-flash-wireframes.png)
+![Wireframes](./assets/fundamentals-wireframes.png)

@@ -14,7 +14,7 @@ exports[`Message should match the snapshot with all data passed in 1`] = `
      is the correct answer 
   </p>
   <button
-    className="next-btn"
+    className="next-btn small-btn"
     onClick={[MockFunction]}
   >
     Next

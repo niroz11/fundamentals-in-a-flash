@@ -11,11 +11,8 @@ class Welcome extends Component {
 
   checkLocalStorage = (event) => {
     event.preventDefault();
-    if (localStorage.hasOwnProperty(event.target.innerHTML)) {
-      this.updateCategoryOptionsToShow(event.target.innerHTML)
-    } else {
-      this.props.setupQuiz(event.target.innerHTML);
-    }
+    let category = event.target.innerHTML;
+    localStorage.hasOwnProperty(category) ? this.updateCategoryOptionsToShow(category) : this.props.setupQuiz(category);
   }
 
   updateCategoryOptionsToShow = (category) => {
@@ -25,14 +22,15 @@ class Welcome extends Component {
   }
 
   render() {
+    let { categories, questionsPerCategory, setupQuiz } = this.props
     return (
       <div className="welcome">
         <p>Take these short quizes to solidify your JS Fundamentals knowledge</p>
         <p>Select a category below to get started</p>
         {
-          this.props.categories.map((category, index) => {
+          categories.map((category, index) => {
             let style = category.toLowerCase().split(' ').join('-');
-            return (this.state.categoryToShowOptionsFor === category) ? <Category setupQuiz={this.props.setupQuiz} category={category} questionsPerCategory={this.props.questionsPerCategory} key={index}/> :
+            return (this.state.categoryToShowOptionsFor === category) ? <Category category={category} questionsPerCategory={questionsPerCategory} setupQuiz={setupQuiz} key={index}/> :
               <button className={"category-btn-" + style} onClick={this.checkLocalStorage} key={index}>{category}</button>
           })
         }
