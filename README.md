@@ -7,7 +7,7 @@ Clone this repo
 Run `npm install` from the root directory  
 Run `npm start` and visit localhost:3000 in your browser
 ### Preview:
-![](./assets/FF-preview.gif)
+![](./assets/fund-flash-preview.gif)
 ### Primary Technologies Used:
 * React
 * JavaScript

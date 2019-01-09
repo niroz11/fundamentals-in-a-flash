@@ -32,7 +32,7 @@ class Messsage extends Component {
           <p><span className="sorry">Sorry that is not correct.</span>Check out the <a href={resources} target="_blank">docs</a> for more information</p>
       }
       {
-          (!isFinalQuestion && userStatus === 'correct') && <button className="next-btn" onClick={moveToNextQuestion}>Next</button>
+          (!isFinalQuestion && userStatus === 'correct') && <button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button>
       }
       {
           (!isFinalQuestion && userStatus === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatus}>Try Again</button><button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button></div> 
