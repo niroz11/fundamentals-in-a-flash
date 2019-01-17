@@ -25,7 +25,7 @@ class Welcome extends Component {
     let { categories, questionsPerCategory, setupQuiz } = this.props
     return (
       <div className="welcome">
-        <p>Take these short quizes to solidify your JS Fundamentals knowledge</p>
+        <p>Take these short quizzes to solidify your JS Fundamentals knowledge</p>
         <p>Select a category below to get started</p>
         {
           categories.map((category, index) => {

@@ -1,7 +1,7 @@
 # Fundamentals In A Flash
 
 ### Abstract:
-The goal of this project was to create a study tool for students that focuses on a technical topic. I decided to create a quiz application where users can test their knowledge on JavaScript fundamentals. As a user answers questions correctly they can choose to continue test their knowledge on those questions or only on the questions they have yet to master.
+The goal of this project was to create a study tool for students that focuses on a technical topic. I decided to create a quiz application where users can test their knowledge on JavaScript fundamentals. As a user answers questions correctly they can choose to continue testing their knowledge on those questions or only on the questions they have yet to master.
 ### Set-Up Frontend:
 Clone this repo  
 Run `npm install` from the root directory  
