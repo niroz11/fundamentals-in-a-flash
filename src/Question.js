@@ -22,14 +22,15 @@ class Question extends Component {
     if (event.target.innerHTML === this.props.currentQuestion.correct_answer) {
       this.saveCorrectlyAnsweredIdToStorage(this.props.currentQuestion.id, this.props.currentQuestion.category)
       this.props.updateCorrectCounter();
-      this.props.updateUserStatus('correct');
+      this.props.updateUserStatusAndResult('', 'correct')
+
     } else {
-      this.props.updateUserStatus('wrong');
+      this.props.updateUserStatusAndResult('', 'wrong');
     }
   }
 
   render() {
-    let { currentQuestion, updateUserStatus, updateCorrectCounter, skipQuestion, questionNum, totalQuizQuestions } = this.props;  
+    let { currentQuestion, skipQuestion, questionNum, totalQuizQuestions } = this.props;  
     let { id, category, question, answers, correct_answer, resources } = currentQuestion;
     let style = category.toLowerCase().split(' ').join('-');
     return (

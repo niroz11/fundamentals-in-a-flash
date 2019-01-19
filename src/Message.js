@@ -8,40 +8,40 @@ class Messsage extends Component {
     };
   }
 
-  updateUserStatus = (event) => {
+  updateUserStatusAndResult = (event) => {
     event.preventDefault();
     if (event.target.innerHTML === 'Finish'){
-      this.props.updateUserStatus('finished');
+      this.props.updateUserStatusAndResult('finished', '');
     } else {
-      this.props.updateUserStatus('guessing');
+      this.props.updateUserStatusAndResult('guessing', '');
     }
   }
 
   render() {
-    let { userStatus, currentQuestion, moveToNextQuestion, isFinalQuestion } = this.props;
-    let { id, category, question, answers, correct_answer, resources } = currentQuestion;
+    let { userResult, currentQuestion, moveToNextQuestion, isFinalQuestion } = this.props;
+    let { category, correct_answer, resources } = currentQuestion;
     let style = category.toLowerCase().split(' ').join('-');
     return (
       <div className={"message-contain " + style}>
       {
-        userStatus === 'correct' && 
+        userResult === 'correct' && 
           <p>Yay! <span className="answer">{correct_answer}</span> is the correct answer </p>
       }
       {
-        userStatus === 'wrong' && 
+        userResult=== 'wrong' && 
           <p><span className="sorry">Sorry that is not correct.</span>Check out the <a href={resources} target="_blank">docs</a> for more information</p>
       }
       {
-          (!isFinalQuestion && userStatus === 'correct') && <button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button>
+          (!isFinalQuestion && userResult === 'correct') && <button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button>
       }
       {
-          (!isFinalQuestion && userStatus === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatus}>Try Again</button><button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button></div> 
+          (!isFinalQuestion && userResult === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatusAndResult}>Try Again</button><button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button></div> 
       }
       {
-          (isFinalQuestion && userStatus === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatus}>Try Again</button><button className="finish-btn small-btn" onClick={this.updateUserStatus}>Finish</button></div>
+          (isFinalQuestion && userResult === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatusAndResult}>Try Again</button><button className="finish-btn small-btn" onClick={this.updateUserStatusAndResult}>Finish</button></div>
       }
       {
-          (isFinalQuestion && userStatus === 'correct')  &&  <button className="finish-btn" onClick={this.updateUserStatus}>Finish</button>
+          (isFinalQuestion && userResult === 'correct')  &&  <button className="finish-btn" onClick={this.updateUserStatusAndResult}>Finish</button>
       }
       </div>
     )

@@ -12,6 +12,7 @@ class App extends Component {
         category: '',
         questions: [],
         userStatus: 'guessing',
+        userResult: '',
         quizQuestionsIds: [],
         quizQuestionsIndex: 0,
         finalQuizQuestion: false,
@@ -22,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     document.body.classList.add('background-color');
-    fetch('http://memoize-datasets.herokuapp.com/api/v1/fundamentalsQuestions')
+    fetch('https://memoize-datasets.herokuapp.com/api/v1/fundamentalsQuestions')
       .then(data => data.json())
       .then((results) => {
         results.fundamentalsQuestions.forEach(question => {
@@ -87,12 +88,14 @@ class App extends Component {
     if (nextQuestionIndex === (this.state.quizQuestionsIds.length - 1)) {
       this.setState({
         userStatus: 'guessing',
+        userResult: '',
         quizQuestionsIndex: nextQuestionIndex,
         finalQuizQuestion: true
       });
     } else {
       this.setState({
         userStatus: 'guessing',
+        userResult: '',
         quizQuestionsIndex: nextQuestionIndex
       });
     }
@@ -102,6 +105,7 @@ class App extends Component {
     this.setState({
       category: '',
       userStatus: 'guessing',
+      userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
       finalQuizQuestion: false,
@@ -137,9 +141,10 @@ class App extends Component {
     this.state.finalQuizQuestion ? this.setState({ userStatus: 'finished' }) : this.moveToNextQuestion()
   }
 
-  updateUserStatus = (status) => {
+  updateUserStatusAndResult = (userStatus, userResult) => {
     this.setState({
-      userStatus: status
+      userStatus,
+      userResult
     });
   }
 
@@ -150,14 +155,14 @@ class App extends Component {
   }
 
   render() {
-    let { category, questions, userStatus, quizQuestionsIds, quizQuestionsIndex, finalQuizQuestion, correctCounter } = this.state;
+    let { category, questions, userStatus, userResult, quizQuestionsIds, quizQuestionsIndex, finalQuizQuestion, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
     let questionsPerCategory = this.getNumofQuestionsPerCategory(categories);
     let currentQuestion = '';
 
     if (category !== '' && userStatus !== 'finished') {
-      let index = quizQuestionsIds[quizQuestionsIndex];
-      currentQuestion = questions.find(question => question.id === index);
+      let currentId = quizQuestionsIds[quizQuestionsIndex];
+      currentQuestion = questions.find(question => question.id === currentId);
     }
 
     return (
@@ -170,13 +175,10 @@ class App extends Component {
           category === '' && <Welcome categories={categories} questionsPerCategory={questionsPerCategory} setupQuiz={this.setupQuiz}/>
         }
         {
-          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} updateUserStatus={this.updateUserStatus} updateCorrectCounter={this.updateCorrectCounter} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds}/>
+          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds} updateUserStatusAndResult={this.updateUserStatusAndResult} updateCorrectCounter={this.updateCorrectCounter}/>
         }
         {
-          userStatus === 'correct' && <Message userStatus={userStatus} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion} updateUserStatus={this.updateUserStatus}/>
-        }
-        {
-          userStatus === 'wrong' && <Message userStatus={userStatus} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion} updateUserStatus={this.updateUserStatus}/>
+          userResult !== '' && <Message userResult={userResult} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion} updateUserStatusAndResult={this.updateUserStatusAndResult}/>
         }
         {
           userStatus === 'finished' && <QuizSummary category={category} numberCorrect={correctCounter} totalQuestions={quizQuestionsIds.length} resetQuiz={this.resetQuiz}/>
