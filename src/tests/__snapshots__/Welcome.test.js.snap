@@ -5,7 +5,7 @@ exports[`Welcome should match the snapshot with all data passed in 1`] = `
   className="welcome"
 >
   <p>
-    Take these short quizes to solidify your JS Fundamentals knowledge
+    Take these short quizzes to solidify your JS Fundamentals knowledge
   </p>
   <p>
     Select a category below to get started

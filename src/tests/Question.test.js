@@ -3,7 +3,7 @@ import Question from '../Question';
 import { shallow } from 'enzyme';
 import { wrap } from 'module';
 
-const updateUserStatusMock = jest.fn();
+const updateUserStatusAndResultMock = jest.fn();
 const updateCorrectCounterMock = jest.fn();
 const skipQuestionMock = jest.fn();
 const questionNum = 1;
@@ -25,11 +25,11 @@ describe('Question', () => {
     wrapper = shallow(
       <Question
         currentQuestion={question}
-        updateUserStatus={updateUserStatusMock}
-        updateCorrectCounter={updateCorrectCounterMock}
         skipQuestion={skipQuestionMock}
         questionNum={questionNum}
         totalQuizQuestions={totalQuizQuestions}
+        updateUserStatusAndResult={updateUserStatusAndResultMock}
+        updateCorrectCounter={updateCorrectCounterMock}
       />
     );
   });
@@ -58,9 +58,9 @@ describe('Question', () => {
     expect(updatedCorrectIds).toEqual([7, 8, 0]);
   });
 
-  it('should validate if an answer is correct and if not pass app a user status of wrong', () => {
+  it('should validate if an answer is correct and if not pass app a user status of an empty string and result of wrong', () => {
     wrapper.find('button.answer2').simulate('click', { preventDefault: () => { }, target: { innerHTML: question.answers[2] } });
-    expect(updateUserStatusMock).toHaveBeenCalledWith('wrong');
+    expect(updateUserStatusAndResultMock).toHaveBeenCalledWith('', 'wrong');
   });
 
   it('should validate if an answer is correct and if so save the id, update correct counter and pass app user status of correct', () => {
@@ -69,7 +69,7 @@ describe('Question', () => {
     wrapper.find('button.answer0').simulate('click', { preventDefault: () => { }, target: { innerHTML: question.answers[0] } });
     expect(instance.saveCorrectlyAnsweredIdToStorage).toHaveBeenCalledWith(question.id, question.category)
     expect(updateCorrectCounterMock).toHaveBeenCalled();
-    expect(updateUserStatusMock).toHaveBeenCalledWith('correct');
+    expect(updateUserStatusAndResultMock).toHaveBeenCalledWith('', 'correct');
   });
 
 });

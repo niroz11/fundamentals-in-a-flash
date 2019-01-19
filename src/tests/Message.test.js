@@ -2,7 +2,7 @@ import React from 'react';
 import Message from '../Message';
 import { shallow } from 'enzyme';
 
-const userStatus = 'correct';
+const userResult = 'correct';
 const currentQuestion = {
   id: "17",
   category: "OOP",
@@ -11,7 +11,7 @@ const currentQuestion = {
   correct_answer: "super",
   resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super"
 }
-const updateUserStatusMock = jest.fn();
+const updateUserStatusAndResultMock = jest.fn();
 const moveToNextQuestionMock = jest.fn();
 
 describe('Message', () => {
@@ -20,11 +20,11 @@ describe('Message', () => {
   beforeEach(() => {
     wrapper = shallow(
       <Message
-        userStatus={userStatus} 
+        userResult={userResult} 
         currentQuestion={currentQuestion} 
-        updateUserStatus={updateUserStatusMock} 
         moveToNextQuestion={moveToNextQuestionMock} 
         isFinalQuestion={false}
+        updateUserStatusAndResult={updateUserStatusAndResultMock}
       />
     );
   });
@@ -39,12 +39,12 @@ describe('Message', () => {
   });
 
   it('should update state to finished', () => {
-    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Finish' }});
-    expect(updateUserStatusMock).toHaveBeenCalledWith('finished');
+    wrapper.instance().updateUserStatusAndResult({ preventDefault: () => { }, target: { innerHTML: 'Finish' }});
+    expect(updateUserStatusAndResultMock).toHaveBeenCalledWith('finished', '');
   });
 
   it('should update state to guessing when the user is wrong and clicks try again', () => {
-    wrapper.instance().updateUserStatus({ preventDefault: () => { }, target: { innerHTML: 'Try Again' } });
-    expect(updateUserStatusMock).toHaveBeenCalledWith('guessing');
+    wrapper.instance().updateUserStatusAndResult({ preventDefault: () => { }, target: { innerHTML: 'Try Again' } });
+    expect(updateUserStatusAndResultMock).toHaveBeenCalledWith('guessing', '');
   });
 });
