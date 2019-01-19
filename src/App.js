@@ -15,7 +15,7 @@ class App extends Component {
         userResult: '',
         quizQuestionsIds: [],
         quizQuestionsIndex: 0,
-        finalQuizQuestion: false,
+        currentQuestionId: '',
         correctCounter: 0,
         lastQuizQuestionIndex: null
     }
@@ -89,8 +89,7 @@ class App extends Component {
       this.setState({
         userStatus: 'guessing',
         userResult: '',
-        quizQuestionsIndex: nextQuestionIndex,
-        finalQuizQuestion: true
+        quizQuestionsIndex: nextQuestionIndex
       });
     } else {
       this.setState({
@@ -108,7 +107,6 @@ class App extends Component {
       userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
-      finalQuizQuestion: false,
       correctCounter: 0,
       lastQuizQuestionIndex: null
     });
@@ -121,24 +119,27 @@ class App extends Component {
   }
 
   setupQuiz = (newCategory, answeredCorrectIds, oneQuestion) => {
+    let quizQuestionsIds = this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds);
+    let currentQuestionId = quizQuestionsIds[this.state.quizQuestionsIndex];
     if (oneQuestion === 'one') {
       this.setState({
         category: newCategory,
-        quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
-        finalQuizQuestion: true,
+        quizQuestionsIds,
+        currentQuestionId,
         lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
       });
     } else {
       this.setState({
         category: newCategory,
-        quizQuestionsIds: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds),
+        quizQuestionsIds,
+        currentQuestionId,
         lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
       });
     }
   }
 
   skipQuestion = () => {
-    this.state.finalQuizQuestion ? this.setState({ userStatus: 'finished' }) : this.moveToNextQuestion()
+    this.checkIfFinalQuestion() ? this.setState({ userStatus: 'finished' }) : this.moveToNextQuestion();
   }
 
   updateUserStatusAndResult = (userStatus, userResult) => {
@@ -154,15 +155,21 @@ class App extends Component {
     });
   }
 
+  checkIfFinalQuestion = () => {
+    if (this.state.quizQuestionsIndex === (this.state.quizQuestionsIds.length - 1)) {
+      return true;
+    }
+    return false;
+  }
   render() {
-    let { category, questions, userStatus, userResult, quizQuestionsIds, quizQuestionsIndex, finalQuizQuestion, correctCounter } = this.state;
+    let { category, questions, userStatus, userResult, quizQuestionsIds, currentQuestionId, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
     let questionsPerCategory = this.getNumofQuestionsPerCategory(categories);
     let currentQuestion = '';
+    let finalQuizQ = this.checkIfFinalQuestion();
 
     if (category !== '' && userStatus !== 'finished') {
-      let currentId = quizQuestionsIds[quizQuestionsIndex];
-      currentQuestion = questions.find(question => question.id === currentId);
+      currentQuestion = questions.find(question => question.id === currentQuestionId);
     }
 
     return (
@@ -178,7 +185,7 @@ class App extends Component {
           (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds} updateUserStatusAndResult={this.updateUserStatusAndResult} updateCorrectCounter={this.updateCorrectCounter}/>
         }
         {
-          userResult !== '' && <Message userResult={userResult} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQuestion} updateUserStatusAndResult={this.updateUserStatusAndResult}/>
+          userResult !== '' && <Message userResult={userResult} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQ} updateUserStatusAndResult={this.updateUserStatusAndResult}/>
         }
         {
           userStatus === 'finished' && <QuizSummary category={category} numberCorrect={correctCounter} totalQuestions={quizQuestionsIds.length} resetQuiz={this.resetQuiz}/>
