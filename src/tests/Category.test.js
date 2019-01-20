@@ -47,10 +47,4 @@ describe('Category', () => {
     expect(setupQuizMock).toHaveBeenCalledWith(category);
   });
 
-  it('should send the correct ids, category and string of one to app when setupQuizWithOneQuestion has been called', () => {
-    localStorage.setItem('Prototype Methods', "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]");
-    wrapper.instance().setupQuizWithOneQuestion({ preventDefault: () => { } });
-    expect(setupQuizMock).toHaveBeenCalledWith(category, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'one');    
-  });
-
 });

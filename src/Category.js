@@ -24,12 +24,6 @@ class Category extends Component {
     this.props.setupQuiz(this.props.category, correctlyAnsweredIds);
   }
 
-  setupQuizWithOneQuestion = (event) => {
-    event.preventDefault();
-    let correctlyAnsweredIds = this.retrieveCorrectAnswerIds(this.props.category);
-    this.props.setupQuiz(this.props.category, correctlyAnsweredIds, 'one');
-  }
-
   render() {
     let { category, questionsPerCategory } = this.props;
     let style = category.toLowerCase().split(' ').join('-');
@@ -43,11 +37,8 @@ class Category extends Component {
         <div className="btns-contain">
           <button className="small-btn" onClick={this.clearStorangeAndSetupQuizWithAllQs}>Try all questions</button>
           {
-            ((allCategoryQs - numMastered) > 1) && <button className="small-btn" onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
+            ((allCategoryQs - numMastered) >= 1) && <button className="small-btn" onClick={this.setupQuizWithoutCorrectlyAnsweredQs}>Try mastering the other {allCategoryQs - numMastered}</button>
           }  
-          {
-            ((allCategoryQs - numMastered) === 1) && <button className="small-btn" id="one-q" onClick={this.setupQuizWithOneQuestion}>Try mastering the other {allCategoryQs - numMastered}</button>
-          }
         </div>
       </div>
     )
