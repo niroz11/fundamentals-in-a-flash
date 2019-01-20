@@ -263,11 +263,11 @@ describe('App', () => {
     wrapper.setState({
       category: '',
       questions: questions,
-      userStatus: 'guessing',
+      userStatus: '',
+      userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
-      lastQuizQuestionIndex: null,
-      finalQuizQuestion: false,
+      currentQuestionId: '',
       correctCounter: 0
     });
   });
@@ -280,11 +280,11 @@ describe('App', () => {
     expect(wrapper.state()).toEqual({
       category: '',
       questions: questions,
-      userStatus: 'guessing',
+      userStatus: '',
+      userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
-      lastQuizQuestionIndex: null,
-      finalQuizQuestion: false,
+      currentQuestionId: '',
       correctCounter: 0
     });
   });
@@ -318,41 +318,31 @@ describe('App', () => {
     expect(questionIds).toEqual(["21", "22", "23", "25", "28", "29"]);
   });
 
-  it('should move to the next question and update state', () => {
+  it('should move to next question by updating current question id and update state', () => {
     expect(wrapper.state('quizQuestionsIndex')).toEqual(0);
-    wrapper.instance().moveToNextQuestion();
+    wrapper.instance().updateCurrentQuestionId();
     expect(wrapper.state('quizQuestionsIndex')).toEqual(1);
-  });
-  
-  it('should move to the next question and if the next question is the final one update state to final question', () => {
-    wrapper.setState({
-      quizQuestionsIds: ["0", "1", "2"],
-      quizQuestionsIndex: 1,
-    });
-    expect(wrapper.state('finalQuizQuestion')).toEqual(false);
-    wrapper.instance().moveToNextQuestion();
-    expect(wrapper.state('finalQuizQuestion')).toEqual(true);
   });
 
   it('should reset the quiz and update state', () => {
     wrapper.setState({
       category: 'OOP',
-      userStatus: 'guessing',
+      userStatus: 'finished',
+      userResult: 'correct',
       quizQuestionsIds: ["13", "14", "15", "16"],
-      quizQuestionsIndex: 4,
-      lastQuizQuestionIndex: 4,
-      finalQuizQuestion: true,
+      quizQuestionsIndex: 3,
+      currentQuestionId: "16",
       correctCounter: 2
     });
     wrapper.instance().resetQuiz();
     expect(wrapper.state()).toEqual({
       category: '',
       questions: questions,
-      userStatus: 'guessing',
+      userStatus: '',
+      userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
-      lastQuizQuestionIndex: null,
-      finalQuizQuestion: false,
+      currentQuestionId: '',
       correctCounter: 0
     });
   });
@@ -369,46 +359,39 @@ describe('App', () => {
       category: 'Scope',
       questions: questions,
       userStatus: 'guessing',
+      userResult: '',
       quizQuestionsIds: ["20", "21", "22", "23", "24", "25", "26", "27", "28", "29"],
       quizQuestionsIndex: 0,
-      lastQuizQuestionIndex: 9,
-      finalQuizQuestion: false,
-      correctCounter: 0
-    });
-  });
-
-  it('should setup a quiz with only one question if the user has correctly answered all but one question in a category', () => {
-    wrapper.instance().setupQuiz('Prototype Methods', ["0", "1", "3", "4", "5", "6", "7", "8", "9", "10", "11"], 'one');
-    expect(wrapper.state()).toEqual({
-      category: 'Prototype Methods',
-      questions: questions,
-      userStatus: 'guessing',
-      quizQuestionsIds: ["2"],
-      quizQuestionsIndex: 0,
-      lastQuizQuestionIndex: 0,
-      finalQuizQuestion: true,
+      currentQuestionId: "20",
       correctCounter: 0
     });
   });
 
   it('should skip a question', () => {
     const instance = wrapper.instance();
-    jest.spyOn(instance, 'moveToNextQuestion');
+    jest.spyOn(instance, 'updateCurrentQuestionId');
     wrapper.instance().skipQuestion();
-    expect(instance.moveToNextQuestion).toHaveBeenCalled();
+    expect(instance.updateCurrentQuestionId).toHaveBeenCalled();
   });
 
-  it('should update userStatus to finished if skipping the last question', () => {
+  it.skip('should update userStatus to finished if skipping the last question', () => {
     wrapper.setState({ finalQuizQuestion: true });
     wrapper.instance().skipQuestion();
     expect(wrapper.state('userStatus')).toEqual('finished');
   });
 
+  it('should update user result with provided argument', () => {
+    wrapper.instance().updateUserStatusAndResult('', 'correct');
+    expect(wrapper.state('userResult')).toEqual('correct');
+    wrapper.instance().updateUserStatusAndResult('', 'wrong');
+    expect(wrapper.state('userResult')).toEqual('wrong');
+  });
+
   it('should update user status with provided argument', () => {
-    wrapper.instance().updateUserStatus('correct');
-    expect(wrapper.state('userStatus')).toEqual('correct');
-    wrapper.instance().updateUserStatus('wrong');
-    expect(wrapper.state('userStatus')).toEqual('wrong');
+    wrapper.instance().updateUserStatusAndResult('finished', '');
+    expect(wrapper.state('userStatus')).toEqual('finished');
+    wrapper.instance().updateUserStatusAndResult('guessing', '');
+    expect(wrapper.state('userStatus')).toEqual('guessing');
   });
 
   it('should increase the correct counter by 1', () => {

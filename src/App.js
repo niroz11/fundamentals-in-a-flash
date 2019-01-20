@@ -11,13 +11,12 @@ class App extends Component {
     this.state = {
         category: '',
         questions: [],
-        userStatus: 'guessing',
+        userStatus: '',
         userResult: '',
         quizQuestionsIds: [],
         quizQuestionsIndex: 0,
         currentQuestionId: '',
-        correctCounter: 0,
-        lastQuizQuestionIndex: null
+        correctCounter: 0
     }
   }
 
@@ -83,32 +82,26 @@ class App extends Component {
     return questionIds;
   }
 
-  moveToNextQuestion = () => {
+  updateCurrentQuestionId = () => {
     let nextQuestionIndex = (this.state.quizQuestionsIndex + 1);
-    if (nextQuestionIndex === (this.state.quizQuestionsIds.length - 1)) {
-      this.setState({
-        userStatus: 'guessing',
-        userResult: '',
-        quizQuestionsIndex: nextQuestionIndex
-      });
-    } else {
-      this.setState({
-        userStatus: 'guessing',
-        userResult: '',
-        quizQuestionsIndex: nextQuestionIndex
-      });
-    }
+    let currentQuestionId = this.state.quizQuestionsIds[nextQuestionIndex];
+    this.setState({
+      userStatus: 'guessing',
+      userResult: '',
+      quizQuestionsIndex: nextQuestionIndex,
+      currentQuestionId
+    });
   }
   
   resetQuiz = () => {
     this.setState({
       category: '',
-      userStatus: 'guessing',
+      userStatus: '',
       userResult: '',
       quizQuestionsIds: [],
       quizQuestionsIndex: 0,
-      correctCounter: 0,
-      lastQuizQuestionIndex: null
+      currentQuestionId: '',
+      correctCounter: 0
     });
   }
 
@@ -118,28 +111,21 @@ class App extends Component {
     });
   }
 
-  setupQuiz = (newCategory, answeredCorrectIds, oneQuestion) => {
+  setupQuiz = (newCategory, answeredCorrectIds) => {
     let quizQuestionsIds = this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds);
-    let currentQuestionId = quizQuestionsIds[this.state.quizQuestionsIndex];
-    if (oneQuestion === 'one') {
-      this.setState({
-        category: newCategory,
-        quizQuestionsIds,
-        currentQuestionId,
-        lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
-      });
-    } else {
-      this.setState({
-        category: newCategory,
-        quizQuestionsIds,
-        currentQuestionId,
-        lastQuizQuestionIndex: this.getQuestionIdsForNewCategory(newCategory, answeredCorrectIds).length - 1
-      });
-    }
+    let currentQuestionId = quizQuestionsIds[0];
+    this.setState({
+      userStatus: 'guessing',
+      category: newCategory,
+      quizQuestionsIds,
+      quizQuestionsIndex: 0,
+      currentQuestionId
+    });
+
   }
 
   skipQuestion = () => {
-    this.checkIfFinalQuestion() ? this.setState({ userStatus: 'finished' }) : this.moveToNextQuestion();
+    this.checkIfFinalQuestion() ? this.setState({ userStatus: 'finished' }) : this.updateCurrentQuestionId();
   }
 
   updateUserStatusAndResult = (userStatus, userResult) => {
@@ -161,6 +147,7 @@ class App extends Component {
     }
     return false;
   }
+
   render() {
     let { category, questions, userStatus, userResult, quizQuestionsIds, currentQuestionId, correctCounter } = this.state;
     let categories = this.getQuestionCategories();
@@ -182,10 +169,10 @@ class App extends Component {
           category === '' && <Welcome categories={categories} questionsPerCategory={questionsPerCategory} setupQuiz={this.setupQuiz}/>
         }
         {
-          (currentQuestion !== '' && userStatus === 'guessing') && <Question currentQuestion={currentQuestion} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds} updateUserStatusAndResult={this.updateUserStatusAndResult} updateCorrectCounter={this.updateCorrectCounter}/>
+          userStatus === 'guessing' && <Question currentQuestion={currentQuestion} skipQuestion={this.skipQuestion} questionNum={this.state.quizQuestionsIndex} totalQuizQuestions={quizQuestionsIds} updateUserStatusAndResult={this.updateUserStatusAndResult} updateCorrectCounter={this.updateCorrectCounter}/>
         }
         {
-          userResult !== '' && <Message userResult={userResult} currentQuestion={currentQuestion} moveToNextQuestion={this.moveToNextQuestion} isFinalQuestion={finalQuizQ} updateUserStatusAndResult={this.updateUserStatusAndResult}/>
+          userResult !== '' && <Message userResult={userResult} currentQuestion={currentQuestion} updateCurrentQuestionId={this.updateCurrentQuestionId} isFinalQuestion={finalQuizQ} updateUserStatusAndResult={this.updateUserStatusAndResult}/>
         }
         {
           userStatus === 'finished' && <QuizSummary category={category} numberCorrect={correctCounter} totalQuestions={quizQuestionsIds.length} resetQuiz={this.resetQuiz}/>
