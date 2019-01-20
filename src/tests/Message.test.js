@@ -12,7 +12,7 @@ const currentQuestion = {
   resources: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super"
 }
 const updateUserStatusAndResultMock = jest.fn();
-const moveToNextQuestionMock = jest.fn();
+const updateCurrentQuestionIdMock = jest.fn();
 
 describe('Message', () => {
   let wrapper;
@@ -22,7 +22,7 @@ describe('Message', () => {
       <Message
         userResult={userResult} 
         currentQuestion={currentQuestion} 
-        moveToNextQuestion={moveToNextQuestionMock} 
+        updateCurrentQuestionId={updateCurrentQuestionIdMock} 
         isFinalQuestion={false}
         updateUserStatusAndResult={updateUserStatusAndResultMock}
       />
@@ -35,7 +35,7 @@ describe('Message', () => {
 
   it('should move to the next question', () => {
     wrapper.find('button.next-btn').simulate('click');
-    expect(moveToNextQuestionMock).toHaveBeenCalled();
+    expect(updateCurrentQuestionIdMock).toHaveBeenCalled();
   });
 
   it('should update state to finished', () => {

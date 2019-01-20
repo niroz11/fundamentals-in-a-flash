@@ -18,7 +18,7 @@ class Messsage extends Component {
   }
 
   render() {
-    let { userResult, currentQuestion, moveToNextQuestion, isFinalQuestion } = this.props;
+    let { userResult, currentQuestion, updateCurrentQuestionId, isFinalQuestion } = this.props;
     let { category, correct_answer, resources } = currentQuestion;
     let style = category.toLowerCase().split(' ').join('-');
     return (
@@ -32,10 +32,10 @@ class Messsage extends Component {
           <p><span className="sorry">Sorry that is not correct.</span>Check out the <a href={resources} target="_blank">docs</a> for more information</p>
       }
       {
-          (!isFinalQuestion && userResult === 'correct') && <button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button>
+          (!isFinalQuestion && userResult === 'correct') && <button className="next-btn small-btn" onClick={updateCurrentQuestionId}>Next</button>
       }
       {
-          (!isFinalQuestion && userResult === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatusAndResult}>Try Again</button><button className="next-btn small-btn" onClick={moveToNextQuestion}>Next</button></div> 
+          (!isFinalQuestion && userResult === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatusAndResult}>Try Again</button><button className="next-btn small-btn" onClick={updateCurrentQuestionId}>Next</button></div> 
       }
       {
           (isFinalQuestion && userResult === 'wrong') && <div className="btns-contain"><button className="tryagain-btn small-btn" onClick={this.updateUserStatusAndResult}>Try Again</button><button className="finish-btn small-btn" onClick={this.updateUserStatusAndResult}>Finish</button></div>
