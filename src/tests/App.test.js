@@ -374,10 +374,17 @@ describe('App', () => {
     expect(instance.updateCurrentQuestionId).toHaveBeenCalled();
   });
 
-  it.skip('should update userStatus to finished if skipping the last question', () => {
-    wrapper.setState({ finalQuizQuestion: true });
+  it('should return true if it is the final question on only question', () => {
+    wrapper.setState({quizQuestionsIds: ["1"]});
+    const isFinalQuestion = wrapper.instance().checkIfFinalQuestion();
+    expect(isFinalQuestion ).toEqual(true);
+  });
+
+  it('should update state to finished if it is the final questions', () => {
+    wrapper.setState({ quizQuestionsIds: ["1"] });
+    expect(wrapper.state('userStatus')).toEqual("");
     wrapper.instance().skipQuestion();
-    expect(wrapper.state('userStatus')).toEqual('finished');
+    expect(wrapper.state('userStatus')).toEqual("finished");
   });
 
   it('should update user result with provided argument', () => {
